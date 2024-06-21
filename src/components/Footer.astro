@@ -4,6 +4,24 @@ import { Image } from 'astro:assets'
 import ponyo from 'images/footer-ponyo.png'
 import { FooterLinks, SITE } from '../config'
 ---
+<div>
+    <script src="https://giscus.app/client.js"
+        data-repo="ycy1/gblog-gblog-template"
+        data-repo-id="R_kgDOML7fww"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOML7fw84CgPW3"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="noborder_light"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
 
 <footer class="w-full bg-neutral-300 dark:bg-neutral-900">
     <div class="mx-auto w-full max-w-[85rem] px-4 py-10 sm:px-6 lg:px-16 lg:pt-20 2xl:max-w-screen-2xl">
@@ -54,3 +72,13 @@ import { FooterLinks, SITE } from '../config'
         </div>
     </div>
 </footer>
+
+
+<!-- Inline CSS giscus评论 -->
+<style is:inline>
+    .giscus .giscus-frame{
+        width: 90%;
+        margin: 0 auto;
+        min-height: 150px;
+    }
+</style>

@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config'
+import netlify from '@astrojs/netlify';
 import mdx from '@astrojs/mdx'
 import tailwind from '@astrojs/tailwind'
 import react from '@astrojs/react'
@@ -8,8 +9,15 @@ import { SITE } from './src/config.ts'
 import { remarkReadingTime } from './src/support/time.ts'
 
 export default defineConfig({
+    // output: 'server',
+    output: 'static',
+    adapter: netlify(),
     site: SITE.url,
     image: {},
+    prefetch: {
+        prefetchAll: true, // 预获取所有链接
+        defaultStrategy: 'viewport' // 当链接进入视口时预获取
+    },
     integrations: [
         mdx(),
         sitemap(),
@@ -35,7 +43,6 @@ export default defineConfig({
             wrap: false,
         },
     },
-    output: 'static',
     // experimental: {
     //     clientPrerender: true,
     //     directRenderScript: true,
