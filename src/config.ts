@@ -2,7 +2,7 @@ import type { NavigationLink, Site, User } from './types.ts'
 
 export const SITE: Site = {
     author: 'XXj',
-    url: 'https://xxjnbgblog.netlify.app/',
+    url: 'https://xxjgbloggood.netlify.app/',
     title: 'Gblog',
     description: 'Gblog是一个开源的、简单的、漂亮的博客，用Astro',
     shortDescription: '',
