@@ -8,24 +8,14 @@ import FeaturesSection from '@components/blocks/FeaturesSection.astro'
 import HeroSectionAlt from '@components/blocks/HeroSectionAlt.astro'
 import blogHeroImg from '@images/hero-landing.png'
 
-import { db } from "@db/config"
-import * as schema from "@db/schema";
-import { sql } from 'drizzle-orm'
+// import { db } from "@db/config"
+// import * as schema from "@db/schema";
+// import { sql } from 'drizzle-orm'
 
 // 通过 getCollection 集合获取 获取所有文章 按时间排序 获取前 3 篇文章
 const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
     (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 ).slice(0, 3);
-
-const tbUsers = await db.select({
-	id: schema.tUser.id,
-	username: schema.tUser.username,
-	fullname: schema.tUser.fullname,
-	lowerName: sql<string>`UPPER(${schema.tUser.username})`,
-}).from(schema.tUser);
-// console.log("tbUsers",tbUsers);
-
-
 
 import algoliasearchNetlify from "algoliasearch"
 // const client = algoliasearch("ORKW4AJR2A", "1c43341c157fc777325f51746ffb893b");
