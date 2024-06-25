@@ -8,15 +8,58 @@ import FeaturesSection from '@components/blocks/FeaturesSection.astro'
 import HeroSectionAlt from '@components/blocks/HeroSectionAlt.astro'
 import blogHeroImg from '@images/hero-landing.png'
 
+import { db } from "@db/config"
+import * as schema from "@db/schema";
+import { sql } from 'drizzle-orm'
 
 // 通过 getCollection 集合获取 获取所有文章 按时间排序 获取前 3 篇文章
 const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
     (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 ).slice(0, 3);
 
+const tbUsers = await db.select({
+	id: schema.tUser.id,
+	username: schema.tUser.username,
+	fullname: schema.tUser.fullname,
+	lowerName: sql<string>`UPPER(${schema.tUser.username})`,
+}).from(schema.tUser);
+// console.log("tbUsers",tbUsers);
+
+
+
+import algoliasearchNetlify from "algoliasearch"
+// const client = algoliasearch("ORKW4AJR2A", "1c43341c157fc777325f51746ffb893b");
+// const index = client.initIndex("test");
+
+// const objects = [
+//   {
+//     objectID: 1,
+//     name: "Foo"
+//   }
+// ];
+
+// index
+//   .saveObjects(objects)
+//   .then(({ objectIDs }) => {
+//     console.log(objectIDs);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
+
+//   index.search("Foo")
+//   .then(({ hits }) => {
+//     console.log(hits);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
+
+
 ---
 
 <BaseLayout>
+
     <HeroSection
         title=`Hello, <span class="text-yellow-500 dark:text-yellow-400">GBlog</span>`
         subTitle="嗨，欢迎来到 Gblog，gblog 是一个用 Astro 构建的开源、简单、美观的博客。"
@@ -25,8 +68,24 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
         src={blogHeroImg}
         alt="godruoyi's blog"
     />
-
+    
     <FeaturesSection />
+
+
+    <div id="search">11111111111</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.css" />
+<script is:inline type="text/javascript" src="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.js"></script>
+<script is:inline type="text/javascript">
+import algoliasearchNetlify from "algoliasearch"
+  algoliasearchNetlify({
+    appId: 'RED8QCNKEV',
+    apiKey: 'b0d6b1df328a8d448201bb04842f002f',
+    siteId: 'cb5590b4-6435-406d-81ab-de48bd1f5e17',
+    branch: 'main',
+    selector: 'div#search',
+  });
+</script>
 
     <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
         <div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14">

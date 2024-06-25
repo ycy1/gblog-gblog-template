@@ -17,6 +17,7 @@ const { category } = Astro.props
 const URL = Astro.url.href
 const categoriesURL = `${Astro.url.origin}/categories`
 
+// 获取所有文章集合  按分类
 const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
     (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 ).filter((b) => {
@@ -46,7 +47,7 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
         title={category.data.title}
         subTitle={category.data.description}
         btnExists={true}
-        btnTitle="转到分类列表"
+        btnTitle="分类列表"
         btnURL="/categories"
     />
 
