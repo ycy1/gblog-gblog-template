@@ -22,6 +22,7 @@ const category: CollectionEntry<'categories'> = (await getCollection('categories
     c => c.slug === post.data.category,
 ).pop()
 
+
 const tags = post.data.tags ?? [category.slug]
 const URL = Astro.url.href
 const ogImage = undefined; // todo

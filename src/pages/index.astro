@@ -8,43 +8,17 @@ import FeaturesSection from '@components/blocks/FeaturesSection.astro'
 import HeroSectionAlt from '@components/blocks/HeroSectionAlt.astro'
 import blogHeroImg from '@images/hero-landing.png'
 
-// import { db } from "@db/config"
-// import * as schema from "@db/schema";
-// import { sql } from 'drizzle-orm'
+import { db } from "@db/config"
+import * as schema from "@db/schema";
+import { sql } from 'drizzle-orm'
 
 // 通过 getCollection 集合获取 获取所有文章 按时间排序 获取前 3 篇文章
 const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
     (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 ).slice(0, 3);
 
-import algoliasearchNetlify from "algoliasearch"
-// const client = algoliasearch("ORKW4AJR2A", "1c43341c157fc777325f51746ffb893b");
-// const index = client.initIndex("test");
-
-// const objects = [
-//   {
-//     objectID: 1,
-//     name: "Foo"
-//   }
-// ];
-
-// index
-//   .saveObjects(objects)
-//   .then(({ objectIDs }) => {
-//     console.log(objectIDs);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });
-
-//   index.search("Foo")
-//   .then(({ hits }) => {
-//     console.log(hits);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });
-
+// const q = await db.select().from(schema.tUser)
+// console.log(q);
 
 ---
 
@@ -95,6 +69,7 @@ import algoliasearchNetlify from "algoliasearch"
             }
         </div>
     </section>
+    
 
     <HeroSectionAlt
         title="在 GitHub 上与我同行"

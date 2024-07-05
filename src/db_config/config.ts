@@ -17,5 +17,5 @@ import { drizzle } from "drizzle-orm/mysql2";
 //   multipleStatements: false, // 是否允许一个 query 中有多个 MySQL 语句，默认为 false
 // });
 
-// // 连接数据库
+// 连接数据库
 // export const db = drizzle(connection,{logger:false});

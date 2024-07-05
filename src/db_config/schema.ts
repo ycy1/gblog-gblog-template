@@ -20,7 +20,7 @@ export const tUser = mysqlTable('t_user', {
   username: varchar('username', { length: 255 }).notNull(),
   password: varchar('password', { length: 255 }).notNull(),
   fullname: varchar('fullname', { length: 255 }),
-  mobile: varchar('mobile', {length: 255}).notNull(),
+  mobile: varchar('mobile', {length: 255}),
   age: int('age'),
 })
 

@@ -32,7 +32,7 @@ export const Friends: User[] = [
         description: 'Go 语言设计与实现作者，偶像',
     },
     {
-        avatar: 'https://pbs.twimg.com/profile_images/1598673328155262977/c_95AZZ8_400x400.jpg',
+        avatar: '',
         social: { twitter: 'brendt_gd', github: 'brendt' },
         title: 'dev adv@phpstorm',
         name: 'Brent Roose',
@@ -47,14 +47,14 @@ export const FooterLinks = [
             { name: '文章', url: '/posts' },
             { name: '时间线', url: '/timeline' },
             { name: '分类', url: '/categories' },
-            { name: '关于', url: '/posts/about-godruoyi' },
+            { name: '关于', url: '/posts/gblog' },
         ],
     },
     {
         section: 'Other',
         links: [
             { name: 'RSS源', url: '/rss.xml' },
-            { name: 'Site Map', url: '/sitemap-index.xml' },
+            { name: 'Git', url: 'https://gitee.com/' },
             { name: 'GitHub', url: 'https://github.com/ycy1' },
         ],
     },

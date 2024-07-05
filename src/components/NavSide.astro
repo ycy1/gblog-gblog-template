@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航回顶部</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style: none;
+            background-repeat: no-repeat;
+        }
+        .content{
+            margin: 0 auto;
+            width: 70%;
+            height: 600px;
+        }
+        .nav{
+            position: fixed;
+            right: 0px;
+            bottom: 50%;
+            transform: translateY(50%);
+            z-index: 9;
+            background-color: #F7F9FA;
+            box-shadow: -2px 0 5px 2px rgba(97, 105, 119, 0.18);
+            border-radius: 18px 0 0 18px;
+            width: 60px;
+        }
+        .nav_box{
+            padding: 26px 0;
+            text-align: center;
+        }
+        .nav_box p{
+            font-size: 12px;
+            color: #333;
+            line-height: 17px;
+        }
+        .nav_box li{
+            cursor: pointer;
+            margin-top: 36px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-content: stretch;
+            flex-direction: column;
+        }
+
+        .nav_box li:hover p{
+            color: #FA5A15;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="content" style="background-color: rgb(191, 209, 248);"></div>
+    <div class="content" style="background-color: pink;"></div>
+    <div class="content" style="background-color: rgb(190, 250, 245);"></div>
+    <div class="content" style="background-color: rgb(250, 228, 200);"></div>
+    <div class="content" style="background-color: rgb(241, 204, 254);"></div>
+    <div class="content" style="background-color: rgb(255, 128, 162);"></div> -->
+    <div class="nav">
+        <ul class="nav_box">
+            <li style="margin-top: -5px;" class= "back-to-home">
+                <svg t="1706775929643" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1819"
+                    width="24" height="24">
+                    <path
+                        d="M948.168406 510.186701 531.992845 126.667911c-10.704806-9.834996-27.224038-9.727549-37.81935 0.107447L75.714937 516.272303c-11.248182 10.486842-11.845793 28.092825-1.412163 39.339983 5.487991 5.868661 12.932544 8.856715 20.377096 8.856715 6.792707 0 13.58439-2.444679 18.96391-7.443529l98.732675-91.885733L212.376457 876.833219c0 15.32401 12.443403 27.821649 27.821649 27.821649l182.087105 0c7.390317 0 14.508435-2.933819 19.724227-8.259104 5.216815-5.216815 8.096399-12.280698 8.096399-19.671015l-0.76134-224.660736 132.095527 0-2.879584 224.335325c-0.107447 7.498788 2.771113 14.671141 8.042163 19.996426 5.216815 5.216815 12.334933 8.259104 19.778462 8.259104l185.619558 0c15.377222 0 27.821649-12.497639 27.821649-27.821649L819.822272 467.639676l90.636277 83.518159c11.247158 10.324136 28.907377 9.617032 39.339983-1.63115C960.177927 538.224268 959.470823 520.619308 948.168406 510.186701zM764.178975 418.191474l0 430.820096L634.583384 849.01157l2.879584-224.388537c0.107447-7.444553-2.771113-14.616906-8.042163-19.942191-5.216815-5.270027-12.334933-8.259104-19.778462-8.259104l-188.226942 0c-7.390317 0-14.508435 2.933819-19.724227 8.205892-5.216815 5.216815-8.096399 12.334933-8.096399 19.724227l0.760317 224.660736L268.018731 849.012593 268.018731 415.855266c0-0.760317-0.38067-1.357927-0.434905-2.118244l245.662049-228.6547L764.505409 416.615583C764.451174 417.158958 764.178975 417.649122 764.178975 418.191474z"
+                        fill="#231815" p-id="1820">
+                    </path>
+                </svg>
+                <p>首页</p>
+            </li>
+            
+            <li>
+                <svg t="1706776191957" class="icon" viewBox="0 0 1060 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4153"
+                    width="24" height="24">
+                    <path
+                        d="M963.2 408c-13.6 0-24 11.2-24 24v432c0 27.2-21.6 48.8-48.8 48.8H159.2c-27.2 0-48.8-21.6-48.8-48.8V159.2c0-27.2 21.6-48.8 48.8-48.8h470.4c13.6 0 24-11.2 24-24 0-13.6-11.2-24-24-24H154.4C103.2 62.4 61.6 104 61.6 155.2v715.2c0 51.2 41.6 92.8 92.8 92.8h740.8c51.2 0 92.8-41.6 92.8-92.8V432c0-12.8-11.2-24-24.8-24z"
+                        fill="" p-id="4154">
+                    </path>
+                    <path
+                        d="M968 151.2l-44-44c-30.4-30.4-78.4-33.6-105.6-5.6L355.2 564.8 510.4 720l463.2-463.2c28-27.2 25.6-75.2-5.6-105.6z m-116.8 159.2l-344 344-86.4-85.6 345.6-345.6 84.8 87.2z m88-88l-51.2 51.2-85.6-86.4 50.4-50.4c10.4-10.4 28.8-9.6 40 2.4l44 44c12 10.4 12.8 28.8 2.4 39.2zM355.2 566.4l-48 174.4c-2.4 8 0 16 5.6 21.6 5.6 5.6 13.6 8 21.6 5.6l174.4-48-36-36L360 715.2l31.2-113.6-36-35.2z"
+                        fill="" p-id="4155">
+                    </path>
+                </svg>
+                <p>反馈</p>
+            </li>
+           
+            <li class="back-to-top">
+                <svg t="1706776294481" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6256"
+                    width="24" height="24">
+                    <path
+                        d="M153.979 174.004h718.833c16.142 0 29.127-12.986 29.127-29.127s-12.986-29.127-29.127-29.127h-718.833c-16.142 0-29.127 12.986-29.127 29.127s12.986 29.127 29.127 29.127zM533.845 246.701c-11.408-11.408-29.855-11.408-41.142 0l-351.952 351.952c-11.408 11.408-11.408 29.855 0 41.142 5.703 5.703 13.107 8.496 20.631 8.496s14.928-2.791 20.631-8.496l302.194-302.194v542.614c0 16.142 12.986 29.127 29.127 29.127s29.127-12.986 29.127-29.127v-542.614l302.194 302.194c5.703 5.703 13.107 8.496 20.631 8.496s14.928-2.791 20.631-8.496c11.408-11.408 11.408-29.855 0-41.142l-352.074-351.952z"
+                        fill="" p-id="6257">
+                    </path>
+                </svg>
+                <p>回顶部</p>
+            </li>
+        </ul>
+    </div>
+    <script>
+        let backToTopBtn = document.querySelector('.back-to-top');
+        backToTopBtn.style.display = 'none';
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300 || document.documentElement.scrollTop > 300) {
+                backToTopBtn.style.display = 'flex';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            smoothScrollToTop();
+            // window.scrollTo({
+            //     top: 0,
+            //     behavior: 'smooth'
+            // });
+        });
+
+        let backToHomeBtn = document.querySelector('.back-to-home');
+        backToHomeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = "/";
+        });
+
+
+        // 平滑滚动到页面顶部
+        function smoothScrollToTop() {
+            const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            
+            if (currentScroll > 0) {
+                window.requestAnimationFrame(smoothScrollToTop);
+                window.scrollTo(0, currentScroll - (currentScroll / 8));
+            }
+        }
+        
+        // 调用函数，平滑滚动到页面顶部
+        // smoothScrollToTop();
+
+    </script>
+</body>
+</html>
