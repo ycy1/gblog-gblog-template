@@ -32,8 +32,8 @@ Windows 下安装
 Redis支持 32位和64位这个需要根据你系统平台的实际情况选择，这里我们下载Redis-x64-xxx.msi安装到redis自定义盘。
 ![alt text](/src/images/postsimg/redisimage.png)
 1. 启动 Redis 服务
-![alt text](/src/images/postsimg/redisimage2.png)
-![alt text](/src/images/postsimg/redisimage3.png)
+![alt text](@images/postsimg/redisimage2.png)
+![alt text](@images/postsimg/redisimage3.png)
 
 
 切换到 redis 目录下运行:
@@ -46,7 +46,7 @@ set my_key 'test' # 设置键值对
 ```sh
 get my_key  # 取出键值对
 ```
-![alt text](/src/images/postsimg/imageredis4.png)
+![alt text](@images/postsimg/imageredis4.png)
 
 ## SpringBoot Redis 
 1. 引入依赖
