@@ -6,7 +6,7 @@ category: "astro"
 cardImage: "@images/banners/why-astro-2.webp"
 cardImage2: "@images/banners/why-astro.jpg"
 tags: ["Astro"]
-selected: true
+selected: false
 ---
 
 **Astro** is the web framework for building **content-driven websites** like blogs, marketing, and e-commerce. Astro is best-known for pioneering a new [frontend architecture](/en/concepts/islands/) to reduce JavaScript overhead and complexity compared to other frameworks. If you need a website that loads fast and has great SEO, then Astro is for you.

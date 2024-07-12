@@ -6,7 +6,7 @@ category: "php"
 cardImage: "@images/banners/laravel-2.jpg"
 cardImage2: "@images/banners/laravel-3.jpg"
 tags: ["Laravel"]
-selected: true
+selected: false
 ---
 
 ## Meet Laravel

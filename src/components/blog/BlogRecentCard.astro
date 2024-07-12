@@ -9,8 +9,9 @@ interface Props {
     blogs: CollectionEntry<'posts'>[]
 }
 
-const posts = blogs.slice(0, 5)
+const posts = blogs.slice(0, 3) // 显示前3个
 ---
+
 
 {
     posts.map((b, index) => index % 2 === 0

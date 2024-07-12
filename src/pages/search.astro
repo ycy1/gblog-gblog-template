@@ -1,0 +1,102 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+---
+
+<!-- <BaseLayout title="Search" activeLink="search">
+  <input id="searchBox" aria-label="search box" autofocus type="text" placeholder="Type here"
+    class="input input-bordered input-info w-full max-w-lg block mx-auto" />
+
+  <div id="results" class="mt-12 grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-8 justify-items-center"></div>
+</BaseLayout> -->
+<BaseLayout
+    title="搜索"
+    description="搜索本站文章">
+
+    <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 mb-10 2xl:max-w-full">
+
+        <input aria-label="search box" autofocus type="text" name="search" id="searchBox" 
+        class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-800 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6
+         input input-bordered input-info max-w-lg mx-auto"
+        placeholder="Search here">
+      <div id="results" class="mt-12 grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-8 justify-items-center"></div>
+    </section>
+   
+</BaseLayout>
+
+
+<script>
+  import { type CollectionEntry, getCollection } from 'astro:content'
+  // import { formatDate } from '../support/time'
+  interface resultInterface {
+    title: string,
+    slug: string,
+    description?: string,
+    tags: Array<string>,
+    data: object
+  }
+  import Fuse, { type FuseResult } from 'fuse.js';
+
+  function formatDate(date: Date): string {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+
+    return `${year}/${month}/${day}`
+}
+
+  async function search() {
+    const options = {
+      // isCaseSensitive: false,
+      // includeScore: false,
+      // shouldSort: true,
+      // includeMatches: false,
+      // findAllMatches: false,
+      // minMatchCharLength: 1,
+      // location: 0,
+      // threshold: 0.6,
+      // distance: 100,
+      // useExtendedSearch: false,
+      ignoreLocation: true,
+      // ignoreFieldNorm: false,
+      // fieldNormWeight: 1,
+      keys: ["data.title"]
+    };
+  
+    const posts = await getCollection('posts')
+    // const posts = await fetch(`${baseSite}/search.json`).then(resp => resp.json());
+    console.log(posts);
+    const fuse = new Fuse(posts, options);
+    const inputBox = document.querySelector<HTMLInputElement>('#searchBox');
+      if (inputBox) {
+      inputBox.addEventListener('input', () => {    
+        const pattern = inputBox.value;
+        console.log(pattern);
+        const results:FuseResult<resultInterface>[] = fuse.search(pattern);
+        console.log(results);
+        let html = "";
+        for (const result of results) {
+          html += (`
+          <div class="bg-white py-10 sm:py-18 rounded-lg">
+            <div class="mx-auto max-w-5xl px-4 lg:px-6">
+              <div class="flex items-center gap-x-3 text-xs">
+                <time datetime="2020-03-16" class="text-gray-500">${formatDate(result.item.data.pubDate)}</time>
+                <a href="/categories/${result.item.data.category}" class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">${result.item.data.category}</a>
+              </div>
+              <div class="mx-auto max-w-2xl lg:mx-0">
+                <h5 class="hover:text-orange-300 text-1xl font-bold tracking-tight text-gray-900 sm:text-2xl"><a href="/posts/${result.item.slug}">${result.item.data.title}</a></h5>
+                <p class="mt-2 text-lg leading-8 text-gray-600">${result.item.data.description}</p>
+              </div>
+            </div>
+          </div>
+          `);
+        }
+        document.querySelector('#results').innerHTML = html;
+      })
+    }
+  }
+  search();
+
+  document.addEventListener('astro:after-swap', search);
+
+</script>

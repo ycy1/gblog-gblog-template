@@ -43,6 +43,9 @@ export default defineConfig({
             wrap: false,
         },
     },
+    server: {                
+        host: '0.0.0.0'   
+    },
     // experimental: {
     //     clientPrerender: true,
     //     directRenderScript: true,

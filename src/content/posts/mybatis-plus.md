@@ -8,6 +8,7 @@ cardImage2: "@images/banners/MyBatis-Plus.webp"
 tags: ["MyBatis", "Orm"]
 selected: true
 ---
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1371353582&auto=1&height=66"></iframe>
 
 ## MyBatis-Plus 简介
 MyBatis-Plus 是一个 MyBatis 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。
@@ -27,12 +28,10 @@ MyBatis-Plus 是一个 MyBatis 的增强工具，在 MyBatis 的基础上只做�
 - 内置全局拦截插件：提供全表 delete 、 update 操作智能分析阻断，也可自定义拦截规则，预防误操作
 
 
-
-
 - [MyBatis-Plus官网](https://baomidou.com/)
 
 -- -
-## MyBatis-Plus 安装 
+## MyBatis-Plus 使用 
 ```java
 <dependency>
     <groupId>com.baomidou</groupId>

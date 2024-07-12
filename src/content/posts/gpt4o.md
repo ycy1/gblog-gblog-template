@@ -6,7 +6,7 @@ category: "tool"
 cardImage: "@images/banners/gpt.jpg"
 cardImage2: "@images/banners/gpt-2.jpg"
 tags: ["GPT", "OpenAI"]
-selected: true
+selected: false
 ---
 
 There are two things from our announcement today I wanted to highlight.
