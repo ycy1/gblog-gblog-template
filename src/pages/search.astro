@@ -1,14 +1,8 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-
+import { Image } from 'astro:assets'
 ---
 
-<!-- <BaseLayout title="Search" activeLink="search">
-  <input id="searchBox" aria-label="search box" autofocus type="text" placeholder="Type here"
-    class="input input-bordered input-info w-full max-w-lg block mx-auto" />
-
-  <div id="results" class="mt-12 grid grid-cols-[repeat(auto-fit,minmax(375px,1fr))] gap-8 justify-items-center"></div>
-</BaseLayout> -->
 <BaseLayout
     title="搜索"
     description="搜索本站文章">
@@ -33,7 +27,13 @@ import BaseLayout from "@layouts/BaseLayout.astro";
     slug: string,
     description?: string,
     tags: Array<string>,
-    data: object
+    data: {
+      title: string,
+      pubDate: Date,
+      category: string,
+      description: string,
+      author: string,
+    }
   }
   import Fuse, { type FuseResult } from 'fuse.js';
 
@@ -43,6 +43,11 @@ import BaseLayout from "@layouts/BaseLayout.astro";
     const day = String(date.getDate()).padStart(2, '0')
 
     return `${year}/${month}/${day}`
+}
+
+// 定义事件处理函数
+function handleClick() {
+    alert('卡片被点击了!');
 }
 
   async function search() {
@@ -77,26 +82,44 @@ import BaseLayout from "@layouts/BaseLayout.astro";
         let html = "";
         for (const result of results) {
           html += (`
-          <div class="bg-white py-10 sm:py-18 rounded-lg">
-            <div class="mx-auto max-w-5xl px-4 lg:px-6">
-              <div class="flex items-center gap-x-3 text-xs">
-                <time datetime="2020-03-16" class="text-gray-500">${formatDate(result.item.data.pubDate)}</time>
-                <a href="/categories/${result.item.data.category}" class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">${result.item.data.category}</a>
+          <div class="bg-white py-10 sm:py-18 rounded-lg shadow-lg dark:bg-neutral-700/60 dark:text-neutral-100"> 
+            <div style="cursor: pointer;" name="mainCard" myurl="/posts/${result.item.slug}" class="mx-auto max-w-5xl px-4 lg:px-6"> 
+              <div class="flex items-center gap-x-3 text-xs mb-4">
+                <time datetime="2020-03-16" class="text-gray-500">⏰${formatDate(result.item.data.pubDate)}</time>
+                <span class="hover:bg-orange-300 hover:text-white dark:hover:text-white dark:hover:bg-orange-300 inline-flex items-center gap-x-1.5 rounded-full bg-neutral-200 px-2 py-1.5 text-xs font-medium text-neutral-700 outline-none focus:outline-none focus-visible:outline-none focus-visible:ring dark:bg-neutral-700/60 dark:text-neutral-300">
+                    <a href="/categories/${result.item.data.category}" >🏷️${result.item.data.category}</a>
+                </span>
+                </div>
+                <div class="mx-auto max-w-2xl lg:mx-0">
+                  <h5 class="hover:text-orange-300 text-1xl font-bold tracking-tight text-gray-900 sm:text-2xl"><a href="/posts/${result.item.slug}">${result.item.data.title}</a></h5>
+                  <p class="mt-2 text-lg leading-8 text-gray-600 dark:text-neutral-400">${result.item.data.description}</p>
+                </div>
               </div>
-              <div class="mx-auto max-w-2xl lg:mx-0">
-                <h5 class="hover:text-orange-300 text-1xl font-bold tracking-tight text-gray-900 sm:text-2xl"><a href="/posts/${result.item.slug}">${result.item.data.title}</a></h5>
-                <p class="mt-2 text-lg leading-8 text-gray-600">${result.item.data.description}</p>
-              </div>
-            </div>
           </div>
           `);
         }
-        document.querySelector('#results').innerHTML = html;
+
+        const res = document.querySelector('#results')
+        if (res)
+          res.innerHTML = html; // 更新结果
+        
+        // 监听页面切换事件
+        document.addEventListener('astro:after-swap', search);
+
+        // 监听卡片点击事件
+        const mainCards = document.getElementsByName('mainCard')
+        mainCards.forEach(function (element) {
+          element.addEventListener('click', function (e) {
+            const myurl = element?.getAttribute('myurl')
+            window.location.href = myurl as string;
+          });
+        });
+        
       })
     }
   }
   search();
 
-  document.addEventListener('astro:after-swap', search);
+  
 
 </script>

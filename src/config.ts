@@ -12,7 +12,7 @@ export const NavigationLinks: NavigationLink[] = [
     { name: '文章', url: '/posts' },
     { name: '分类', url: '/categories' },
     { name: '时间线', url: '/timeline' },
-    { name: '关于', url: '/posts/gblog' },
+    { name: '关于', url: '/contact' },
     { name: '伙伴', url: '/friends' },
 ]
 
@@ -47,7 +47,7 @@ export const FooterLinks = [
             { name: '文章', url: '/posts' },
             { name: '时间线', url: '/timeline' },
             { name: '分类', url: '/categories' },
-            { name: '关于', url: '/posts/gblog' },
+            { name: '关于', url: '/contact' },
         ],
     },
     {

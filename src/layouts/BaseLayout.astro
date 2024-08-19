@@ -48,10 +48,10 @@ const normalizeTitle = !title ? SITE.title : `${title} - ${SITE.title}`
         </script>
         <GoogleAnalytics />
     </head>
-    <body class="bg-neutral-200 selection:bg-yellow-400 selection:text-neutral-700 dark:bg-neutral-800">
+    <body id="body" class="bg-neutral-200 selection:bg-yellow-400 selection:text-neutral-700 dark:bg-neutral-800">
         <div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
             <Header />
-            <main>
+            <main id="main">
                 <slot />
             </main>
         </div>
@@ -84,4 +84,47 @@ const normalizeTitle = !title ? SITE.title : `${title} - ${SITE.title}`
             }
         </style>
     </body>
+
+    <script>
+        import confetti from 'canvas-confetti'
+        // confetti({ particleCount: 100, angle: 120, spread: 60 });
+        // 获取元素
+        var element = document.getElementById('body');
+        
+        // 页面点击事件触发烟花
+        element.addEventListener('click', (e) => {
+            let x = e.clientX; // 获取鼠标点击的X坐标
+            let y = e.clientY; // 获取鼠标点击的Y坐标
+            const width = window.innerWidth; // 获取视口宽度
+            const height = window.innerHeight; // 获取视口高度
+            const left = window.screenLeft; // 获取视口宽度
+            const top = window.screenTop; // 获取视口高度
+            x = (e.clientX  - left) / width;
+            y = (e.clientY  - top) / height;
+            // console.log(x, y);
+            // var pineapple = confetti.shapeFromText({ text: '❤️', scalar :20 });
+            // 调用 confetti 函数，设置烟花的起始位置
+            confetti({
+                particleCount: 100, // 每次发射的烟花数量
+                spread: 360, // 烟花的散开度
+                ticks: 40, // 烟花的持续时间
+                decay: 0.94, // 烟花的衰减系数
+                startVelocity: 30, // 烟花的初始速度
+                gravity: 0.2, // 烟花的重力
+                tilt: 90, // 烟花的倾斜角度
+                isPaused: false, // 是否暂停
+                shapes: ['star'], // 烟花的形状
+                scalar: 1.2, // 烟花的缩放比例
+                origin:{
+                    x: x, // 烟花的起始X坐标
+                    y: y, // 烟花的起始Y坐标
+                },
+                // x: x, // 烟花的起始X坐标
+                // y: y, // 烟花的起始Y坐标
+                width: width-500, // 烟花的容器宽度
+                height: height-500, // 烟花的容器高度
+                colors: ['#ff5858', '#ffae29', '#29ff3e', '#2997ff', '#f229ff'], // 烟花的颜色
+            });
+        });
+    </script>
 </html>

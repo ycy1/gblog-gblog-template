@@ -1,0 +1,126 @@
+---
+// Import the necessary dependencies.
+import AuthBtn from "@components/buttons/AuthBtn.astro";
+import ContactIconBlock from "@components/blog/blocks/ContactIconBlock.astro";
+import TextInput from "@components/blog/blocks/TextInput.astro";
+import EmailContactInput from "@components/blog/blocks/EmailContactInput.astro";
+import PhoneInput from "@components/blog/blocks/PhoneInput.astro";
+import TextAreaInput from "@components/blog/blocks/TextAreaInput.astro";
+import Icon from "@components/icons/icon.astro";
+
+// Define the variables that will be used in this component
+const title: string = "关于本站";
+const subTitle: string =
+  "您有疑问或想讨论项目吗？联系我们，让我们用我们的工具和服务创建完美的解决方案。";
+const formTitle: string = "请填写表格";
+const formSubTitle: string =
+  "我们将在 1-2 个工作日内回复您。";
+
+// Define the email URL
+const EmailUrl: string = import.meta.env.EMAIL_URL;
+---
+
+
+<!-- Contact Us -->
+<section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+  <div class="mx-auto max-w-2xl lg:max-w-5xl">
+    <div class="text-center">
+      <h1
+        class="text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-4xl md:leading-tight"
+      >
+        {title}
+      </h1>
+      <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">
+        {subTitle}
+      </p>
+    </div>
+
+    <div class="mt-12 grid items-center gap-6 lg:grid-cols-2 lg:gap-16">
+      <div class="flex flex-col rounded-xl p-4 sm:p-6 lg:p-8">
+        <h2
+          class="mb-8 text-xl font-bold text-neutral-700 dark:text-neutral-300"
+        >
+          {formTitle}
+        </h2>
+        <!-- Form for user input with various input fields.-->
+        <!-- Each field utilizes a different input component for the specific type of input (text, email, phone, and textarea)-->
+        <form id="myForm" method="POST">
+          <div class="grid gap-4">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <TextInput
+                id="hs-firstname-contacts"
+                label="名"
+                name="firstname"
+              />
+              <TextInput
+                id="hs-lastname-contacts"
+                label="姓名"
+                name="firstname"
+              />
+            </div>
+            <EmailContactInput id="hs-email-contacts" />
+            <PhoneInput id="hs-phone-number" />
+            <TextAreaInput
+              id="hs-about-contacts"
+              label="请输入详情"
+              name="about"
+            />
+          </div>
+
+          <div class="mt-4 grid">
+            <AuthBtn title="发送消息" />
+          </div>
+
+          <div class="mt-3 text-center">
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              {formSubTitle}
+            </p>
+          </div>
+        </form>
+      </div>
+
+      <!--ContactIconBlocks are used to display different methods of contacting, including visiting office, email, browsing knowledgebase, and FAQ.-->
+      <div class="divide-y divide-neutral-300 dark:divide-neutral-700">
+        <ContactIconBlock
+          heading="Base de connaissances"
+          content="Parcourez tous nos articles de base de connaissances."
+          isLinkVisible={true}
+          linkTitle="Visiter les guides et tutoriels"
+          linkURL="#"
+          isArrowVisible={true}
+          ><Icon name="question" />
+        </ContactIconBlock>
+
+        <ContactIconBlock
+          heading="FAQ"
+          content="Explorez notre FAQ pour des réponses rapides et claires aux questions courantes."
+          isLinkVisible={true}
+          linkTitle="Visiter la FAQ"
+          linkURL="#"
+          isArrowVisible={true}
+          ><Icon name="chatBubble" />
+        </ContactIconBlock>
+
+        <ContactIconBlock
+          heading="Visitez notre bureau"
+          content="ScrewFast UK"
+          isAddressVisible={true}
+          addressContent="72 Union Terrace, E10 4PE London"
+          ><Icon name="mapPin" />
+        </ContactIconBlock>
+
+        <ContactIconBlock
+          heading="Contactez-nous par e-mail"
+          content="Préférez-vous le texte écrit ? Envoyez-nous un e-mail à"
+          isLinkVisible={true}
+          linkTitle="support@screwfast.uk"
+          linkURL="#"
+          ><Icon name="envelopeOpen" />
+        </ContactIconBlock>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 邮件发送 -->
+<script is:inline src="/src/message/email.js" type="module"></script>
+

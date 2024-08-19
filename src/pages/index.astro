@@ -17,6 +17,8 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
     (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 ).slice(0, 3);
 
+
+
 // const q = await db.select().from(schema.tUser)
 // console.log(q);
 
@@ -40,15 +42,9 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.css" />
 <script is:inline type="text/javascript" src="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.js"></script>
-<script is:inline type="text/javascript">
-import algoliasearchNetlify from "algoliasearch"
-  algoliasearchNetlify({
-    appId: 'RED8QCNKEV',
-    apiKey: 'b0d6b1df328a8d448201bb04842f002f',
-    siteId: 'cb5590b4-6435-406d-81ab-de48bd1f5e17',
-    branch: 'main',
-    selector: 'div#search',
-  });
+<script>
+  
+
 </script>
 
     <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">

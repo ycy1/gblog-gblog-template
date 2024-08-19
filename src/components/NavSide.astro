@@ -26,7 +26,7 @@
             background-color: #F7F9FA;
             box-shadow: -2px 0 5px 2px rgba(97, 105, 119, 0.18);
             border-radius: 18px 0 0 18px;
-            width: 60px;
+            width: 50px;
         }
         .nav_box{
             padding: 26px 0;
@@ -61,8 +61,8 @@
     <div class="content" style="background-color: rgb(241, 204, 254);"></div>
     <div class="content" style="background-color: rgb(255, 128, 162);"></div> -->
     <div class="nav">
-        <ul class="nav_box">
-            <li style="margin-top: -5px;" class= "back-to-home">
+        <ul class="nav_box dark:bg-neutral-400 dark:text-white rounded-lg">
+            <li style="margin-top: -5px;" class= "back-to-home" title="回到首页">
                 <svg t="1706775929643" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1819"
                     width="24" height="24">
                     <path
@@ -73,7 +73,7 @@
                 <p>首页</p>
             </li>
             
-            <li>
+            <li title="反馈" class="feedback">
                 <svg t="1706776191957" class="icon" viewBox="0 0 1060 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4153"
                     width="24" height="24">
                     <path
@@ -88,7 +88,7 @@
                 <p>反馈</p>
             </li>
            
-            <li class="back-to-top">
+            <li class="back-to-top" title="回顶部">
                 <svg t="1706776294481" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6256"
                     width="24" height="24">
                     <path
@@ -125,11 +125,17 @@
             window.location.href = "/";
         });
 
+        // feedback
+        let feedBackBtn = document.querySelector('.feedback');
+        feedBackBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = "/contact";
+        });
+
 
         // 平滑滚动到页面顶部
         function smoothScrollToTop() {
             const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
-            
             if (currentScroll > 0) {
                 window.requestAnimationFrame(smoothScrollToTop);
                 window.scrollTo(0, currentScroll - (currentScroll / 8));

@@ -10,7 +10,9 @@
       "@layouts/*": ["layouts/*"],
       "@pages/*": ["pages/*"],
       "@images/*": ["images/*"],
-      "@db/*": ["db_config/*"]
+      "@db/*": ["db_config/*"],
+      "@message/*": ["message/*"],
+      "@files/*": ["files/*"]
     },
   }
 }

@@ -18,6 +18,50 @@ type Props = CollectionEntry<'posts'>
 const post = Astro.props
 const { Content, remarkPluginFrontmatter } = await post.render()
 
+import marked from 'marked';
+import nodemailer  from 'nodemailer';
+
+
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.qq.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: 'jxj1014@qq.com',
+    pass: 'xdkltmeqwplcbdde'
+  }
+})
+
+
+import test from "@files/test.txt";
+
+const mailOptions = {
+  from: "jxj1014@qq.com",
+  to: "2039916844@qq.com",
+  subject: '主题',
+  html: "内容",
+  attachments: [
+        {
+            filename: 'test.txt', // 附件文件名
+            path: test.slice(1),
+        }
+    ]
+}
+
+// transporter.sendMail(mailOptions, function(error, info) {
+//   if (error) {
+//     console.log(error)
+//   } else {
+//     console.log('Email sent: ' + info.response)
+//   }
+// })
+
+
+
+
+// console.log("Content222" ,  marked.parse(post.body||''));
+
 const category: CollectionEntry<'categories'> = (await getCollection('categories')).filter(
     c => c.slug === post.data.category,
 ).pop()
@@ -73,7 +117,7 @@ const ogImage = undefined; // todo
                                 class="flex items-center text-sm text-orange-400 hover:text-orange-500 focus:outline-none focus:text-orange-500"
                                 href=`/categories/${category.slug}`
                             >
-                                {category?.data?.title}
+                            🔖{category?.data?.title}
                             </a>
                             <svg
                                 class="flex-shrink-0 size-5 text-neutral-500 dark:text-neutral-600 mx-2"
@@ -116,7 +160,7 @@ const ogImage = undefined; // todo
 
                 <div class="mt-10 md:mt-14 mx-auto grid max-w-screen-lg gap-y-5 sm:flex sm:items-center sm:justify-between sm:gap-y-0">
                     <div class="flex flex-wrap gap-x-2 gap-y-1 sm:flex-nowrap sm:items-center sm:gap-y-0">
-                        {
+                        🔖{
                             tags.map((tag: string) => (
                                 <span class="inline-flex items-center gap-x-1.5 rounded-lg bg-neutral-400/30 px-3 py-1.5 text-xs font-medium text-neutral-700 outline-none focus:outline-none focus-visible:outline-none focus-visible:ring dark:bg-neutral-700/60 dark:text-neutral-300">
                                     {tag}

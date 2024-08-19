@@ -1,5 +1,6 @@
 ---
 import BrandLogo from '@components/logos/BrandLogo.astro'
+import EmailFooterInput from "@components/blog/blocks/EmailFooterInput.astro";
 import { Image } from 'astro:assets'
 import ponyo from 'images/footer-ponyo.png'
 import { FooterLinks, SITE } from '../config'
@@ -52,6 +53,7 @@ import { FooterLinks, SITE } from '../config'
             }
 
             <div class="col-span-2 flex justify-center mt-10 md:mt-0">
+                
                 <div class="max-w-[320px] max-h-[320px] -mt-16 scale-75 hidden md:block">
                     <Image
                         src={ponyo}
@@ -60,6 +62,11 @@ import { FooterLinks, SITE } from '../config'
                         draggable="false"
                         loading="eager"
                     />
+                    <div style="position: relative;right: 30%; width: 155%;">
+                        <form>
+                            <EmailFooterInput />
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
