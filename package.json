@@ -25,6 +25,7 @@
     "astro-compressor": "^0.4.1",
     "canvas-confetti": "^1.9.3",
     "drizzle-orm": "^0.31.4",
+    "flowbite": "^2.5.1",
     "fuse.js": "^7.0.0",
     "marked": "^14.0.0",
     "mdast-util-to-string": "^4.0.0",

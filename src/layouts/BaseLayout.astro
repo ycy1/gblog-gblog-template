@@ -38,6 +38,9 @@ const normalizeTitle = !title ? SITE.title : `${title} - ${SITE.title}`
             }
         </script>
         <script is:inline src="/vendor/lenis/lenis1.0.42.min.js"></script>
+        <!-- GrowlNotification 通知 -->
+        <script is:inline src="/notice/growl-notification.min.js"></script>
+        <link href="/notice/light-theme.min.css" rel="stylesheet">
         <script is:inline>
             const lenis = new Lenis();
             function raf(time) {
@@ -45,6 +48,16 @@ const normalizeTitle = !title ? SITE.title : `${title} - ${SITE.title}`
                 requestAnimationFrame(raf)
             }
             requestAnimationFrame(raf)
+
+            // GrowlNotification 全局配置
+            GrowlNotification.setGlobalOptions({
+                title: '消息通知',
+                position: 'top-center', // 位置
+                closeTimeout:3000, // 显示时间
+                showProgress:true, // 是否显示进度条
+                width:'400px', // 宽度
+                margin: 10, // 间距
+            })
         </script>
         <GoogleAnalytics />
     </head>
