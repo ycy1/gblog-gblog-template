@@ -129,11 +129,11 @@ const { EmailUrl, mailConfig } = Astro.props
 
 <!-- 邮件发送 -->
 <script>
-  const EmailUrl = document.getElementById('EmailUrl')?.innerHTML
-  const mailConfig = document.getElementById('mailConfig')?.innerHTML
-  
-  console.log('EmailUrl', document.getElementById('EmailUrl')?.innerHTML);
-  console.log('mailConfig',document.getElementById('EmailUrl')?.innerHTML);
+  // const EmailUrl = document.getElementById('EmailUrl')?.innerHTML
+  // const mailConfig = document.getElementById('mailConfig')?.innerHTML
+
+  // console.log('EmailUrl', document.getElementById('EmailUrl')?.innerHTML);
+  // console.log('mailConfig',document.getElementById('EmailUrl')?.innerHTML);
   
   const from = document.getElementById('myForm')
   if(from){
@@ -143,7 +143,7 @@ const { EmailUrl, mailConfig } = Astro.props
         // 执行验证逻辑
         var formData = new FormData(this); // 'this' refers to the form element
 
-        let mailOptions = JSON.parse(mailConfig)
+        let mailOptions = {from: "jxj1014@qq.com",to: "2039916844@qq.com",subject: "意见反馈",html: "内容"}
         for (var pair of formData.entries()) {
           if(pair[0] === 'about'){
             mailOptions.html = pair[1].toString()
@@ -154,7 +154,7 @@ const { EmailUrl, mailConfig } = Astro.props
         }
         console.log("mailOptions", mailOptions);
       // 调用 node 接口
-      fetch(EmailUrl, {
+      fetch("http://111.67.201.26:3000/send", {
           'method': 'POST',
           'body': JSON.stringify(mailOptions),
           'headers': {
