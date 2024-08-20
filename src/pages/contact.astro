@@ -2,13 +2,16 @@
 // Import the necessary components
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ContactSection from "@components/blog/ContactSection_fr.astro";
+// Define the email URL
+const EmailUrl: string = import.meta.env.EMAIL_URL;
+const mailConfig: string = import.meta.env.MAIL_CONFIG;
 ---
 
 <BaseLayout
     title="关于"
     description="关于本站">
 
-    <ContactSection />
+    <ContactSection EmailUrl={EmailUrl} mailConfig={mailConfig} />
    
 </BaseLayout>
   
