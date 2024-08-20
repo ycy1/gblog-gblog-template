@@ -131,7 +131,7 @@ const mailConfig: string = import.meta.env.MAIL_CONFIG;
 
 
 <!-- 邮件发送 -->
-<script>
+<script is:inline>
   const EmailUrl = document.getElementById('EmailUrl')?.innerHTML
   const mailConfig = document.getElementById('mailConfig')?.innerHTML
   console.log(EmailUrl);
