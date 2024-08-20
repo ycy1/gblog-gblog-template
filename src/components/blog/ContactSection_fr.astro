@@ -123,13 +123,20 @@ const mailConfig: string = import.meta.env.MAIL_CONFIG;
   </div>
 </section>
 
+<!-- frontmatter 变量接收域  -->
+<div style="display: none;" id="Myfrontmatter">
+  <span id="EmailUrl">{EmailUrl}</span>
+  <span id="mailConfig">{mailConfig}</span>
+</div>
+
 
 <!-- 邮件发送 -->
-<script define:vars={{ EmailUrl, mailConfig }}>
+<script>
+  const EmailUrl = document.getElementById('EmailUrl')?.innerHTML
+  const mailConfig = document.getElementById('mailConfig')?.innerHTML
   console.log(EmailUrl);
   console.log(mailConfig);
   
-
   const from = document.getElementById('myForm')
   if(from){
     from.addEventListener('submit', function(event) {
@@ -166,6 +173,14 @@ const mailConfig: string = import.meta.env.MAIL_CONFIG;
 
     });
   }
+
+
+  let utterThis = new SpeechSynthesisUtterance();
+  utterThis.text = '转载请写明出处 目前限于IE，博主在写了兼容语句的jsp上应用可以在360浏览器上播放 1.下载、并安装插件：微软TTS5.1语音引擎(中文) 2.设置：安装好后，打开IE浏览器的Internet选项的安全中，点开自定义级别，打开各个站点，将“ActiveX控件和插件”下的所有栏目设为启用。 3.简单应用的话，直接在前端页面写个按钮，js的按钮事件中创建对象：';
+  utterThis.lang = 'en-US';// 汉语 zh-CN 英文 en-US
+  utterThis.rate = 1;//语速
+  speechSynthesis.speak(utterThis);
+
 </script>
 
 
