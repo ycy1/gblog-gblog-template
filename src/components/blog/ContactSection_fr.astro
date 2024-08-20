@@ -16,13 +16,14 @@ const formTitle: string = "请填写表格";
 const formSubTitle: string =
   "我们将在 1-2 个工作日内回复您。";
 
-// Define the email URL
-// const EmailUrl: string = import.meta.env.EMAIL_URL;
-// const mailConfig: string = import.meta.env.MAIL_CONFIG;
-
 const { EmailUrl, mailConfig } = Astro.props
----
 
+---
+<!-- frontmatter 变量接收域  -->
+<div style="display: none;" id="Myfrontmatter">
+  <span id="EmailUrl">{EmailUrl}</span>
+  <span id="mailConfig">{mailConfig}</span>
+</div>
 
 <!-- Contact Us -->
 <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
@@ -125,19 +126,14 @@ const { EmailUrl, mailConfig } = Astro.props
   </div>
 </section>
 
-<!-- frontmatter 变量接收域  -->
-<div style="display: none;" id="Myfrontmatter">
-  <span id="EmailUrl">{EmailUrl}</span>
-  <span id="mailConfig">{mailConfig}</span>
-</div>
-
 
 <!-- 邮件发送 -->
-<script is:inline>
+<script>
   const EmailUrl = document.getElementById('EmailUrl')?.innerHTML
   const mailConfig = document.getElementById('mailConfig')?.innerHTML
-  console.log(EmailUrl);
-  console.log(mailConfig);
+  
+  console.log('EmailUrl', document.getElementById('EmailUrl')?.innerHTML);
+  console.log('mailConfig',document.getElementById('EmailUrl')?.innerHTML);
   
   const from = document.getElementById('myForm')
   if(from){
