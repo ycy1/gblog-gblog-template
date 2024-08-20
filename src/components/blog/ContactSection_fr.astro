@@ -154,7 +154,7 @@ const { EmailUrl, mailConfig } = Astro.props
         }
         console.log("mailOptions", mailOptions);
       // 调用 node 接口
-      fetch("http://111.67.201.26:3000/send", {
+      fetch('http://111.67.201.26:3000/send', {
           'method': 'POST',
           'body': JSON.stringify(mailOptions),
           'headers': {
