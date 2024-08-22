@@ -3,6 +3,7 @@ import BaseHead from '@components/BaseHead.astro'
 import Footer from '@components/Footer.astro'
 import Header from '@components/Header.astro'
 import NavSide from '@components/NavSide.astro'
+import NavSide2 from '@components/NavSide2.astro'
 import GoogleAnalytics from '@components/support/GoogleAnalytics.astro'
 import { SITE } from '../config'
 
@@ -69,7 +70,8 @@ const normalizeTitle = !title ? SITE.title : `${title} - ${SITE.title}`
             </main>
         </div>
         <Footer />
-        <NavSide />
+        <!-- <NavSide /> -->
+        <NavSide2 />
 
         <style>
             .scrollbar-hide::-webkit-scrollbar {

@@ -3,7 +3,7 @@ import type { APIRoute } from 'astro'
 import sharp from 'sharp'
 import ico from 'sharp-ico'
 
-const faviconSrc = path.resolve('src/images/icon.png')
+const faviconSrc = path.resolve('src/images/avataaars.png')
 
 export const GET: APIRoute = async () => {
     // Resize the image to multiple sizes

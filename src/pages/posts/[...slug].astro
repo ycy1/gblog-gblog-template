@@ -19,48 +19,9 @@ const post = Astro.props
 const { Content, remarkPluginFrontmatter } = await post.render()
 
 import marked from 'marked';
-import nodemailer  from 'nodemailer';
+const text =  marked.parse(post.body||'')
 
 
-
-const transporter = nodemailer.createTransport({
-  host: 'smtp.qq.com',
-  port: 465,
-  secure: true,
-  auth: {
-    user: 'jxj1014@qq.com',
-    pass: 'xdkltmeqwplcbdde'
-  }
-})
-
-
-import test from "@files/test.txt";
-
-const mailOptions = {
-  from: "jxj1014@qq.com",
-  to: "2039916844@qq.com",
-  subject: '主题',
-  html: "内容",
-  attachments: [
-        {
-            filename: 'test.txt', // 附件文件名
-            path: test.slice(1),
-        }
-    ]
-}
-
-// transporter.sendMail(mailOptions, function(error, info) {
-//   if (error) {
-//     console.log(error)
-//   } else {
-//     console.log('Email sent: ' + info.response)
-//   }
-// })
-
-
-
-
-// console.log("Content222" ,  marked.parse(post.body||''));
 
 const category: CollectionEntry<'categories'> = (await getCollection('categories')).filter(
     c => c.slug === post.data.category,
@@ -179,4 +140,18 @@ const ogImage = undefined; // todo
             </div>
         </div>
     </section>
+
+    <script define:vars={{text}}>
+        console.log(text);
+        
+        let utterThis = new SpeechSynthesisUtterance();
+        utterThis.text = text
+        utterThis.lang = 'zh-CN';// 汉语 zh-CN 英文 en-US
+        utterThis.rate = 1;//语速
+        // speechSynthesis.speak(utterThis);
+    </script>
+
+
 </BaseLayout>
+
+

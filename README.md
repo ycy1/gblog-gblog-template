@@ -26,7 +26,7 @@ Gblog is a blog template designed for those who are unable or unwilling to write
 
 ### Deployment
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fgodruoyi%2Fgblog&project-name=my-blog&repository-name=my-blog)
+[![Deploy with Netlify](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/01c2a2f72e3a42c7b816df1c712fe51c~tplv-k3u1fbpfcp-zoom-1.image)](https://app.netlify.com/)
 
 
 See [Deploy your Astro Site](https://docs.astro.build/en/guides/deploy/) get more info.

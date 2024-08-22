@@ -50,18 +50,10 @@ const { EmailUrl, mailConfig } = Astro.props
         <!-- Each field utilizes a different input component for the specific type of input (text, email, phone, and textarea)-->
         <form id="myForm" method="POST">
           <div class="grid gap-4">
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <TextInput
-                id="hs-firstname-contacts"
-                label="名"
-                name="firstname"
-              />
-              <TextInput
+            <TextInput
                 id="hs-lastname-contacts"
                 label="姓名"
-                name="firstname"
-              />
-            </div>
+                name="firstname"/>
             <EmailContactInput id="hs-email-contacts" />
             <PhoneInput id="hs-phone-number" />
             <TextAreaInput
@@ -143,15 +135,28 @@ const { EmailUrl, mailConfig } = Astro.props
         // 执行验证逻辑
         var formData = new FormData(this); // 'this' refers to the form element
 
-        let mailOptions = {from: "jxj1014@qq.com",to: "2039916844@qq.com",subject: "意见反馈",html: "内容"}
+        let data = {
+          name: "jxj1014",
+          email: "2039916844@qq.com",
+          phone: "123456789",
+          detail: "内容"
+        }
+        let mailOptions = {from: "jxj1014@qq.com",to: "2039916844@qq.com",subject: "意见反馈",html: "内容",data: data}
         for (var pair of formData.entries()) {
           if(pair[0] === 'about'){
-            mailOptions.html = pair[1].toString()
+            // mailOptions.html = pair[1].toString()
+            data.detail = pair[1].toString()
           }else if(pair[0] === 'email'){
+            data.email = pair[1].toString()
             mailOptions.to = pair[1].toString()
+          }else if(pair[0] === 'firstname'){
+            data.name = pair[1].toString()
+          }else if(pair[0] === 'phone'){
+            data.phone = pair[1].toString()
           }
           console.log(pair[0] + ': ' + pair[1]);
         }
+        mailOptions.data = data
         console.log("mailOptions", mailOptions);
       // 调用 node 接口
       fetch('http://111.67.201.26:3000/send', {
