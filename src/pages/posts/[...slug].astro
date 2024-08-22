@@ -18,8 +18,8 @@ type Props = CollectionEntry<'posts'>
 const post = Astro.props
 const { Content, remarkPluginFrontmatter } = await post.render()
 
-import marked from 'marked';
-const text =  marked.parse(post.body||'')
+// import marked from 'marked';
+// const text =  marked.parse(post.body||'')
 
 
 
@@ -141,7 +141,7 @@ const ogImage = undefined; // todo
         </div>
     </section>
 
-    <script define:vars={{text}}>
+    <!-- <script define:vars={{text}}>
         console.log(text);
         
         let utterThis = new SpeechSynthesisUtterance();
@@ -149,7 +149,7 @@ const ogImage = undefined; // todo
         utterThis.lang = 'zh-CN';// 汉语 zh-CN 英文 en-US
         utterThis.rate = 1;//语速
         // speechSynthesis.speak(utterThis);
-    </script>
+    </script> -->
 
 
 </BaseLayout>
