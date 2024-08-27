@@ -30,6 +30,7 @@ const categoryCollection = defineCollection({
         title: z.string(),
         description: z.string(),
         icon: z.string().optional(),
+        isHot:z.boolean().optional(),
     }),
 })
 

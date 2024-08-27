@@ -8,7 +8,7 @@ cardImage2: "@images/banners/redis简介.png"
 tags: ["Redis"]
 selected: true
 ---
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=234015&auto=1&height=66"></iframe>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=80% height=86 src="//music.163.com/outchain/player?type=2&id=234015&auto=1&height=66"></iframe>
 
 Redis（Remote Dictionary Server）是一个开源的、基于内存的键值对存储系统，广泛应用于高性能缓存、消息中间件、会话共享等场景。它是一个NoSQL数据库，支持多种数据结构，如字符串、哈希表、列表、集合、有序集合等。
 
@@ -35,6 +35,7 @@ Redis支持 32位和64位这个需要根据你系统平台的实际情况选择�
 1. 启动 Redis 服务
 ![alt text](@images/postsimg/redisimage2.png)
 ![alt text](@images/postsimg/redisimage3.png)
+
 
 
 切换到 redis 目录下运行:

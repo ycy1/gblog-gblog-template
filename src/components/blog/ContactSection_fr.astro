@@ -12,9 +12,8 @@ import Icon from "@components/icons/icon.astro";
 const title: string = "关于本站";
 const subTitle: string =
   "您有疑问或想讨论项目吗？联系我们，让我们用我们的工具和服务创建完美的解决方案。";
-const formTitle: string = "请填写表格";
-const formSubTitle: string =
-  "我们将在 1-2 个工作日内回复您。";
+const formTitle: string = "请填写表单";
+const formSubTitle: string = "我们将在 1-2 个工作日内回复您。";
 
 const { EmailUrl, mailConfig } = Astro.props
 
@@ -67,6 +66,11 @@ const { EmailUrl, mailConfig } = Astro.props
             <AuthBtn title="发送消息" />
           </div>
 
+          <div class="flex items-center mb-4 pt-4">
+            <input checked id="checkbox-1" type="checkbox" value="true" name="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" >
+            <label for="checkbox-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">我同意这些<a href="#" class="text-blue-600 hover:underline dark:text-blue-500">条款和条件</a>。</label>
+         </div>
+      
           <div class="mt-3 text-center">
             <p class="text-sm text-neutral-600 dark:text-neutral-400">
               {formSubTitle}
@@ -134,7 +138,10 @@ const { EmailUrl, mailConfig } = Astro.props
         event.preventDefault();
         // 执行验证逻辑
         var formData = new FormData(this); // 'this' refers to the form element
-
+        if(!formData.has('checkbox')) {
+          GrowlNotification.notify({description: '请先同意我们的条款和条件',type: 'warning',title:null});
+          return;
+        }
         let data = {
           name: "jxj1014",
           email: "2039916844@qq.com",
@@ -159,7 +166,7 @@ const { EmailUrl, mailConfig } = Astro.props
         mailOptions.data = data
         console.log("mailOptions", mailOptions);
       // 调用 node 接口
-      fetch('http://111.67.201.26:3000/send', {
+      fetch('http://112.124.40.67:3000/send', {
           'method': 'POST',
           'body': JSON.stringify(mailOptions),
           'headers': {

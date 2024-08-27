@@ -24,6 +24,7 @@ const postMap: Map<string, CollectionEntry<'posts'>[]> = (await getCollection('p
 const categories = await getCollection('categories')
 const description = '以下是我感兴趣的一些类别，包括MYSQL、AI和她的生活。'
 const URL = Astro.url.href
+
 ---
 
 <BaseLayout
@@ -57,6 +58,7 @@ const URL = Astro.url.href
                         title={c.data.title}
                         description={c.data.description}
                         count={postMap.get(c.slug)?.length ?? 0}
+                        isHot={c.data.isHot?true : false}
                         publishDate={timeago(postMap.get(c.slug)?.[0]?.data?.pubDate)}
                     />
                 ))
