@@ -94,18 +94,17 @@ class BlogToMarkdown {
 
     convertPostToMarkdown(post) {
         return `---
-title: "${post.title}"
-description: "${post.description}"
-pubDate: "${this.formatDate(post.pubDate)}"
-category: "${post.category.slug}"
-cardImage: "${post.banner}"
-tags: ["${post.category.slug}"]
-oldViewCount: ${post.viewCount}
-oldKeywords: ["${post.keyword}"]
----
+            title: "${post.title}"
+            description: "${post.description}"
+            pubDate: "${this.formatDate(post.pubDate)}"
+            category: "${post.category.slug}"
+            cardImage: "${post.banner}"
+            tags: ["${post.category.slug}"]
+            oldViewCount: ${post.viewCount}
+            oldKeywords: ["${post.keyword}"]
+            ---
 
-${post.content}
-`
+            ${post.content}`
     }
 
     formatPosts(categoryMap, posts) {

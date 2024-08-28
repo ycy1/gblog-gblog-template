@@ -35,6 +35,7 @@ See [Deploy your Astro Site](https://docs.astro.build/en/guides/deploy/) get mor
 
 Thanks https://github.com/mearashadowfax/ScrewFast, The majority of the code for this project comes from ScrewFast.
 
+- 线上预览地址：https://xxjgbloggood.netlify.app
 ## License
 
 This project is released under the MIT License. Please read the [LICENSE](https://github.com/godruoyi/gblog/blob/astro/LICENSE) file for more details.
