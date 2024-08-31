@@ -37,9 +37,10 @@ export default defineConfig({
         remarkPlugins: [remarkReadingTime],
         shikiConfig: {
             themes: {
-                light: 'material-theme-lighter',
-                dark: 'one-dark-pro',
+                light: 'dark-plus',
+                dark: 'solarized-light',
             },
+            langs: ['javascript', 'typescript', 'html', 'css', 'json', 'md', 'mdx', 'yaml', 'shell', 'bash', 'python', 'java'],
             wrap: false,
         },
     },

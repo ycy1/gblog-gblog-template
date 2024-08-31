@@ -43,7 +43,7 @@ const transporter = nodemailer.createTransport({
     secure: true, //使用SSL加密
     auth: {
       user: 'jxj1014@qq.com', //邮箱
-      pass: 'xdkltmeqwplcbdde' //授权码
+      pass: 'xxxxxxxxx' //授权码
     }
 });
 ```
