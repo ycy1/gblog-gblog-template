@@ -1,6 +1,6 @@
 ---
 title: "MyBatis-Plus"
-description: "MyBatis-Plus 是一个 MyBatis 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。"
+description: "🚀MyBatis-Plus 是一个 MyBatis 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。"
 pubDate: "2024-06-25 11:22:42"
 category: "datastorage"
 cardImage: "@images/banners/MyBatis-Plus.webp"

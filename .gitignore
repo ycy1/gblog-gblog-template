@@ -5,6 +5,7 @@ dist/
 
 # dependencies
 node_modules/
+drizzle/
 
 # logs
 npm-debug.log*

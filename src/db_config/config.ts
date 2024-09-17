@@ -1,6 +1,7 @@
 // import { defineDb, defineTable, column } from 'astro:db';
 import mysql from "mysql2/promise";
 import { drizzle } from "drizzle-orm/mysql2";
+import * as schema from "./schema";
 
 /**
  * 数据库配置

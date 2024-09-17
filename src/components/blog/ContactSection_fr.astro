@@ -125,12 +125,7 @@ const { EmailUrl, mailConfig } = Astro.props
 
 <!-- 邮件发送 -->
 <script>
-  // const EmailUrl = document.getElementById('EmailUrl')?.innerHTML
-  // const mailConfig = document.getElementById('mailConfig')?.innerHTML
 
-  // console.log('EmailUrl', document.getElementById('EmailUrl')?.innerHTML);
-  // console.log('mailConfig',document.getElementById('EmailUrl')?.innerHTML);
-  
   const from = document.getElementById('myForm')
   if(from){
     from.addEventListener('submit', function(event) {
@@ -138,10 +133,8 @@ const { EmailUrl, mailConfig } = Astro.props
         event.preventDefault();
         // 执行验证逻辑
         var formData = new FormData(this); // 'this' refers to the form element
-        if(!formData.has('checkbox')) {
-          GrowlNotification.notify({description: '请先同意我们的条款和条件',type: 'warning',title:null});
-          return;
-        }
+        if(!check_data(formData)) return; // 验证失败，返回
+
         let data = {
           name: "jxj1014",
           email: "2039916844@qq.com",
@@ -151,7 +144,6 @@ const { EmailUrl, mailConfig } = Astro.props
         let mailOptions = {from: "jxj1014@qq.com",to: "2039916844@qq.com",subject: "意见反馈",html: "内容",data: data}
         for (var pair of formData.entries()) {
           if(pair[0] === 'about'){
-            // mailOptions.html = pair[1].toString()
             data.detail = pair[1].toString()
           }else if(pair[0] === 'email'){
             data.email = pair[1].toString()
@@ -182,6 +174,34 @@ const { EmailUrl, mailConfig } = Astro.props
       });
 
     });
+  }
+
+
+
+
+  /**
+   * 验证表单数据
+   * @param formData 表单数据
+   * @returns boolean
+   */
+  function check_data(formData: FormData){
+        if(!formData.has('checkbox')) {
+          GrowlNotification.notify({description: '请先同意我们的条款和条件',type: 'warning',title:null});
+          return false;
+        }
+
+        // 必填项
+        const email_error = document.getElementById('email_error')
+        const email_contacts = document.getElementById('hs-email-contacts')
+        if(!formData.get('email')){
+          email_contacts?.setAttribute('class', 'block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:outline-none focus:ring focus:ring-neutral-400 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:placeholder:text-neutral-400 dark:focus:ring-1 bg-red-50 border border-red-500 text-red-900')
+          email_error.innerText = 'Email is required！'
+          return false;
+        }else{
+          email_contacts?.setAttribute('class', 'block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:outline-none focus:ring focus:ring-neutral-400 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:placeholder:text-neutral-400 dark:focus:ring-1')
+          email_error.innerText = ''
+        }
+        return true;
   }
 
 

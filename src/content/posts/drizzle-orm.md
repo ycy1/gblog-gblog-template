@@ -1,6 +1,6 @@
 ---
 title: "Drizzle-Orm"
-description: "Drizzle ORM 是一个带有头🐲的无头 TypeScript ORM"
+description: "🐉Drizzle ORM 是一个专为 SQL 数据库设计的 TypeScript 对象关系映射（ORM）库。"
 pubDate: "2024-06-24 11:22:42"
 category: "datastorage"
 cardImage: "@images/banners/Drizzle-Orm.webp"

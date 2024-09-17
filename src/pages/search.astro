@@ -8,19 +8,6 @@ import { Image } from 'astro:assets'
     description="搜索本站文章">
 
     <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 mb-10 2xl:max-w-full">
-
-        <!-- 搜索框 -->
-        <!-- <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-        <div class="relative">
-            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                </svg>
-            </div>
-            <input type="search" id="searchBox2" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search here" required />
-        </div> -->
-
-
       <!-- 搜索框 -->
       <div class="relative">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -55,6 +42,8 @@ import { Image } from 'astro:assets'
       category: string,
       description: string,
       author: string,
+      cardImage: {src: string, alt: string},
+      tags: Array<string>
     }
   }
   import Fuse, { type FuseResult } from 'fuse.js';
@@ -101,7 +90,7 @@ import { Image } from 'astro:assets'
         let html = "";
         for (const result of results) {
           html += (`
-          <div class="bg-white py-10 sm:py-18 rounded-lg shadow-lg dark:bg-neutral-700/60 dark:text-neutral-100"> 
+          <div class="bg-white py-10 sm:py-18 rounded-lg shadow-lg dark:bg-neutral-700/60 dark:text-neutral-100 hover:shadow-lg"> 
             <div style="cursor: pointer;" name="mainCard" myurl="/posts/${result.item.slug}" class="mx-auto max-w-5xl px-4 lg:px-6"> 
               <div class="flex items-center gap-x-3 text-xs mb-4">
                 <time datetime="2020-03-16" class="text-gray-500">⏰${formatDate(result.item.data.pubDate)}</time>
@@ -110,8 +99,17 @@ import { Image } from 'astro:assets'
                 </span>
                 </div>
                 <div class="mx-auto max-w-2xl lg:mx-0">
-                  <a href="/posts/${result.item.slug}" class="dark:text-neutral-300 hover:text-orange-500 dark:hover:text-orange-500 text-1xl font-bold tracking-tight text-gray-900 sm:text-2xl">
-                    <h5>${result.item.data.title}</h5>
+                  <a href="/posts/${result.item.slug}" class="group dark:text-neutral-300 hover:text-orange-500 dark:hover:text-orange-500 text-1xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+                    <div class="flex items-center">
+                        <Image
+                            class="w-8 h-8 rounded-full me-2 start-0 top-0 size-full object-cover transition duration-600 group-hover:scale-125"
+                            src=${result.item.data.cardImage.src}
+                            alt=${result.item.data.title}
+                            draggable="false"
+                            loading="eager"
+                        />
+                        <h5>${result.item.data.title}</h5>
+                    </div>
                     <p class="mt-2 text-lg leading-8 text-gray-600 dark:text-neutral-400">${result.item.data.description}</p>
                   </a>
                 </div>

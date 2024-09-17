@@ -3,6 +3,7 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 import { type CollectionEntry, getCollection } from 'astro:content'
 import MainSection from '@components/blocks/MainSection.astro'
 import BlogCard from '@components/blog/BlogCard.astro'
+import BlogList from '@components/blog/BlogList.astro'
 import { SITE } from '../../config'
 
 export async function getStaticPaths() {
@@ -47,13 +48,52 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
         title={category.data.title}
         subTitle={category.data.description}
         btnExists={true}
+        isCategory={true}
         btnTitle="分类列表"
         btnURL="/categories"
     />
 
     <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 mb-10 2xl:max-w-full">
-        <div class="grid gap-6 grid-cols-1 lg:grid-cols-3 sm:grid-cols-2">
+        <!-- 卡片 -->
+        <div id="cardBlog" class="grid gap-6 grid-cols-1 lg:grid-cols-3 sm:grid-cols-2">
             {posts.map(b => <BlogCard blog={b} />)}
+        </div>
+
+        <!-- 列表 -->
+        <div id="listBlog"  class="block gap-6 grid-cols-1 lg:grid-cols-3 sm:grid-cols-2">
+            {posts.map(b => <BlogList blog={b} />)}
         </div>
     </section>
 </BaseLayout>
+
+<script>
+    // 图标
+    const list = document.getElementById('list')
+    const card = document.getElementById('card')
+    // 内容
+    const listBlog = document.getElementById('listBlog')
+    const cardBlog = document.getElementById('cardBlog')
+
+    listBlog?.setAttribute("style","display:none")
+    card?.setAttribute("style","display:none")
+
+    if(list){
+        list.addEventListener('click', function(event) {
+            list?.setAttribute("style","display:none")
+            listBlog?.setAttribute("style","display:block")
+
+            card?.setAttribute("style","display:flex")
+            cardBlog?.setAttribute("style","display:none")
+            
+        })
+    }
+
+    if(card){
+        card.addEventListener('click', function(event) {
+            card?.setAttribute("style","display:none")
+            cardBlog?.setAttribute("style","display:grid")
+            list?.setAttribute("style","display:flex")
+            listBlog?.setAttribute("style","display:none")
+        })
+    }
+</script>
