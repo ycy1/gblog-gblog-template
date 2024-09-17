@@ -101,11 +101,12 @@ import { Image } from 'astro:assets'
                 <div class="mx-auto max-w-2xl lg:mx-0">
                   <a href="/posts/${result.item.slug}" class="group dark:text-neutral-300 hover:text-orange-500 dark:hover:text-orange-500 text-1xl font-bold tracking-tight text-gray-900 sm:text-2xl">
                     <div class="flex items-center">
-                        <Image
+                        <img
                             class="w-8 h-8 rounded-full me-2 start-0 top-0 size-full object-cover transition duration-600 group-hover:scale-125"
                             src=${result.item.data.cardImage.src}
                             alt=${result.item.data.title}
                             draggable="false"
+                            format="avif"
                             loading="eager"
                         />
                         <h5>${result.item.data.title}</h5>
