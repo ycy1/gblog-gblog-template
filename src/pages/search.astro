@@ -146,28 +146,14 @@ import { Image } from 'astro:assets'
 
   function getImage2(posts: CollectionEntry<'posts'>[]) {
     console.log("DEV", import.meta.env);
-    var images = {}
-    if(import.meta.env.DEV){ // dev 环境
-      images = import.meta.glob<{ default: ImageMetadata }>('/public/images/postpicture/*.{jpeg,jpg,png,gif,webp,avif}');
-    }else{
-      // https://xxjgbloggood.netlify.app/
-      images = import.meta.glob<{ default: ImageMetadata }>('./images/postpicture/*.{jpeg,jpg,png,gif,webp,avif}');
-    }
-    
-    console.log("images", images);
     
     posts.map(async post => {
-      var imgSrc = ""
-      for (let key in images){
-        let b =key && key.toLowerCase().includes(post.slug.toLowerCase());
-        if(b){
-          imgSrc = key
-          break;
-        }
-    }
-      console.log(post.slug,imgSrc);
-      // const imageShow = await getImage({ src: imgSrc,width:post.data.cardImage.width,height:post.data.cardImage.height,format:post.data.cardImage.format })
-      post.data.imageShow = imgSrc
+      console.log(post.slug , post.slug.toLowerCase()+'.webp');
+      if(import.meta.env.DEV){ // dev 环境
+        post.data.imageShow = "/public/images/postpicture/"+post.slug+'.webp'
+      }else{
+        post.data.imageShow = "/images/postpicture/"+post.slug+'.webp'
+      }
     })
 
     console.log("posts2", posts);
