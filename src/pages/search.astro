@@ -79,10 +79,7 @@ import { Image } from 'astro:assets'
     };
   
     const posts = await getCollection('posts')
-    // const posts = await fetch(`${baseSite}/search.json`).then(resp => resp.json());
-    // console.log(posts);
-    getImage2(posts);
-    console.log("posts3" , posts);
+    getImagePicture(posts); // 预加载图片
     const fuse = new Fuse(posts, options);
     const inputBox = document.querySelector<HTMLInputElement>('#searchBox');
       if (inputBox) {
@@ -111,6 +108,9 @@ import { Image } from 'astro:assets'
                             class="w-8 h-8 rounded-full me-2 start-0 top-0 size-full object-cover transition duration-600 group-hover:scale-125"
                             src=${result.item.data.imageShow}
                             alt=${result.item.data.title}
+                            format="webp"
+                            decoding="async"
+                            loading="lazy"
                         />
                         <h5>${result.item.data.title}</h5>
                     </div>
@@ -144,7 +144,11 @@ import { Image } from 'astro:assets'
   search();
 
 
-  function getImage2(posts: CollectionEntry<'posts'>[]) {
+  /**
+   * 获取图片地址
+   * @param posts  CollectionEntry<'posts'>[]
+   */
+  function getImagePicture(posts: CollectionEntry<'posts'>[]) {
     console.log("DEV", import.meta.env);
     
     posts.map(async post => {
@@ -155,9 +159,6 @@ import { Image } from 'astro:assets'
         post.data.imageShow = "/images/postpicture/"+post.slug+'.webp'
       }
     })
-
-    console.log("posts2", posts);
-
   }
 
   
