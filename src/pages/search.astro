@@ -150,7 +150,8 @@ import { Image } from 'astro:assets'
     if(import.meta.env.DEV){ // dev 环境
       images = import.meta.glob<{ default: ImageMetadata }>('/public/images/postpicture/*.{jpeg,jpg,png,gif,webp,avif}');
     }else{
-      images = import.meta.glob<{ default: ImageMetadata }>('/images/postpicture/*.{jpeg,jpg,png,gif,webp,avif}');
+      // https://xxjgbloggood.netlify.app/
+      images = import.meta.glob<{ default: ImageMetadata }>('./images/postpicture/*.{jpeg,jpg,png,gif,webp,avif}');
     }
     
     console.log("images", images);
