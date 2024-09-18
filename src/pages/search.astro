@@ -146,8 +146,13 @@ import { Image } from 'astro:assets'
 
   function getImage2(posts: CollectionEntry<'posts'>[]) {
     console.log("DEV", import.meta.env);
-
-    const images = import.meta.glob<{ default: ImageMetadata }>('/public/images/postpicture/*.{jpeg,jpg,png,gif,webp,avif}');
+    var images = {}
+    if(import.meta.env.DEV){ // dev 环境
+      images = import.meta.glob<{ default: ImageMetadata }>('/public/images/postpicture/*.{jpeg,jpg,png,gif,webp,avif}');
+    }else{
+      images = import.meta.glob<{ default: ImageMetadata }>('/images/postpicture/*.{jpeg,jpg,png,gif,webp,avif}');
+    }
+    
     console.log("images", images);
     
     posts.map(async post => {
