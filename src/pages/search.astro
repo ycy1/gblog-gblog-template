@@ -1,11 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-// import { Image } from 'astro:assets'
-// const images = await Astro.glob("@images/banners/*").then(files => {
-//   return files.map(file => file.default.src);
-// });
-
-// console.log(images);
+import { Image } from 'astro:assets'
 ---
 
 <BaseLayout
@@ -35,7 +30,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 
 <script>
   import { type CollectionEntry, getCollection } from 'astro:content'
-  import { Image } from 'astro:assets'
+  import { Image,getImage } from 'astro:assets'
 
   // import { formatDate } from '../support/time'
   interface resultInterface {
@@ -64,7 +59,6 @@ import BaseLayout from "@layouts/BaseLayout.astro";
     return `${year}/${month}/${day}`
 }
 
-import { getImage } from 'astro:assets'
 
   async function search() {
     const options = {
@@ -86,11 +80,9 @@ import { getImage } from 'astro:assets'
   
     const posts = await getCollection('posts')
     // const posts = await fetch(`${baseSite}/search.json`).then(resp => resp.json());
-    console.log(posts);
-    posts.map(async post => {
-      const imageShow = await getImage({ src: post.data.cardImage,width:post.data.cardImage.width,height:post.data.cardImage.height,format:post.data.cardImage.format })
-      post.data.imageShow = imageShow
-    })
+    // console.log(posts);
+    getImage2(posts);
+    console.log("posts3" , posts);
     const fuse = new Fuse(posts, options);
     const inputBox = document.querySelector<HTMLInputElement>('#searchBox');
       if (inputBox) {
@@ -117,7 +109,7 @@ import { getImage } from 'astro:assets'
                     <div class="flex items-center">
                         <Image
                             class="w-8 h-8 rounded-full me-2 start-0 top-0 size-full object-cover transition duration-600 group-hover:scale-125"
-                            src=${result.item.data.imageShow.src}
+                            src=${result.item.data.imageShow}
                             alt=${result.item.data.title}
                         />
                         <h5>${result.item.data.title}</h5>
@@ -150,6 +142,29 @@ import { getImage } from 'astro:assets'
     }
   }
   search();
+
+
+  function getImage2(posts: CollectionEntry<'posts'>[]) {
+    const images = import.meta.glob<{ default: ImageMetadata }>('/public/images/postpicture/*.{jpeg,jpg,png,gif,webp,avif}');
+    console.log("images", images);
+    
+    posts.map(async post => {
+      var imgSrc = ""
+      for (let key in images){
+        let b =key && key.toLowerCase().includes(post.slug.toLowerCase());
+        if(b){
+          imgSrc = key
+          break;
+        }
+    }
+      console.log(post.slug,imgSrc);
+      // const imageShow = await getImage({ src: imgSrc,width:post.data.cardImage.width,height:post.data.cardImage.height,format:post.data.cardImage.format })
+      post.data.imageShow = imgSrc
+    })
+
+    console.log("posts2", posts);
+
+  }
 
   
 

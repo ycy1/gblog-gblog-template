@@ -12,7 +12,7 @@
       "@images/*": ["images/*"],
       "@db/*": ["db_config/*"],
       "@message/*": ["message/*"],
-      "@files/*": ["files/*"]
+      "@files/*": ["files/*"],
     },
   }
 }
