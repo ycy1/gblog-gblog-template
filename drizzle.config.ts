@@ -1,7 +1,7 @@
 import { defineConfig } from 'drizzle-kit'
 
 export default defineConfig({
-  schema: "./scripts/schema.js",
+  schema: "./drizzle/schema.ts",
   dialect: 'mysql',
   out: "./drizzle",
   breakpoints: true,
@@ -14,6 +14,6 @@ export default defineConfig({
     // host: import.meta.env.MYSQL_HOST,
     // port: import.meta.env.MYSQL_PORT,
     // database: import.meta.env.MYSQL_DB,
-    url: `mysql://root:root@112.124.40.67:3306/xxj_gblog`,
+    url: `mysql://root:03171122991Xxj!@112.124.40.67:3306/xxj_gblog`,
   }
 })

@@ -28,16 +28,27 @@ interface Props {
                 />
             </div>
             <div class="flex-1 min-w-0">
-                <p class="text-lg font-semibold text-gray-900 truncate group-hover:text-orange-500 dark:text-white dark:group-hover:text-orange-500">
-                    {blog.data.title}
-                </p>
-                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                <div class="flex items-center">
+                    <p class="text-lg font-semibold text-gray-900 truncate group-hover:text-orange-500 dark:text-white dark:group-hover:text-orange-500">
+                        {blog.data.title}
+                    </p>
+                </div>
+                
+                <p title={blog.data.description} class="text-sm text-gray-500 truncate dark:text-gray-400">
                     {blog.data.description}
                 </p>
             </div>
-            <div class="inline-flex items-center text-sm pt-5 text-gray-500 dark:text-gray-400">
-                {formatDate(blog.data.pubDate)}
+            <div class="text-right text-sm pt-5 text-gray-500 dark:text-gray-400">
+                <p>{formatDate(blog.data.pubDate)}</p>
+                <div class="mt-2">
+                    {
+                        blog.data.tags?.map((tag) => (
+                        <span class="bg-orange-300 group-hover:bg-orange-400 text-white text-xs font-medium ms-2 px-2.5 py-0.5 rounded dark:bg-orange-500 dark:group-hover:bg-orange-700">{tag}</span>
+                        ))
+                    }
+                </div>
             </div>
+            
             </div>
         </div>
     </div>
