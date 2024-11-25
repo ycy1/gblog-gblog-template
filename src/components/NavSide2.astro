@@ -2,10 +2,10 @@
 
 <div id="dialParent" data-dial-init class="fixed end-6 bottom-20 group">
     <div id="dialContent" class="flex flex-col items-center hidden mb-4 space-y-2">
-        <button id="click_home" type="button" data-tooltip-target="tooltip-home" data-tooltip-placement="left" class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400">
+        <a href="/" id="click_home" type="button" data-tooltip-target="tooltip-home" data-tooltip-placement="left" class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400">
             <svg class="icon w-6 h-6" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10351" width="48" height="48"><path d="M640.992 928.288 384.992 928.288C384.992 928.288 384.992 741.792 384.992 640.288 384.992 623.296 391.744 607.04 403.744 595.04 415.744 583.04 432.032 576.288 448.992 576.288 488.096 576.288 537.888 576.288 576.992 576.288 593.952 576.288 610.24 583.04 622.24 595.04 634.24 607.04 640.992 623.296 640.992 640.288 640.992 741.792 640.992 928.288 640.992 928.288ZM971.264 477.792 559.232 82.464C533.632 57.888 492.192 57.824 466.496 82.464L54.464 477.792C16.224 514.496 27.904 544.288 81.184 544.288L163.296 544.288 191.2 928.64C193.952 963.648 224.96 992.288 260.448 992.288L765.568 992.288C800.928 992.288 832.032 963.808 834.816 928.64L862.688 544.288 944.544 544.288C997.568 544.288 971.264 477.792 971.264 477.792Z" p-id="10352" fill="#6B7280"></path></svg>
             <span class="sr-only">Home</span>
-        </button>
+        </a>
         <div id="tooltip-home" role="tooltip" class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
             Home
             <div class="tooltip-arrow" data-popper-arrow></div>
@@ -18,10 +18,10 @@
             Top
             <div class="tooltip-arrow" data-popper-arrow></div>
         </div>
-        <button id="click_feedback" type="button" data-tooltip-target="tooltip-feedback" data-tooltip-placement="left" class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400">
+        <a id="click_feedback" href="/contact" type="button" data-tooltip-target="tooltip-feedback" data-tooltip-placement="left" class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400">
             <svg class="icon w-6 h-6" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="16175" width="32" height="32"><path d="M143.992471 650.511059v181.458823l180.374588-104.448c24.877176 4.065882 81.408 8.463059 107.64047 8.463059 229.737412 0 384-170.977882 384-372.013176S623.284706 0 432.007529 0C201.938824 0 15.992471 162.966588 15.992471 364.001882c0 116.464941 44.423529 215.341176 128 286.509177z m464.022588-330.511059a47.977412 47.977412 0 1 1 0 95.924706 47.977412 47.977412 0 0 1 0-95.924706z m-192.030118 0a48.007529 48.007529 0 1 1 0 95.984941 48.007529 48.007529 0 0 1 0-95.984941z m-192 0a48.007529 48.007529 0 1 1 0.030118 96.045176 48.007529 48.007529 0 0 1-0.030118-96.045176z m176.00753 479.984941h-95.984942c76.197647 74.511059 164.773647 119.988706 288.015059 119.988706 26.202353 0 51.772235-2.349176 76.649412-6.415059L847.992471 1024v-181.519059c97.28-66.620235 160.015059-170.014118 160.015058-286.479059 0-103.815529-49.904941-197.240471-129.596235-263.559529l1.596235 27.557647c0.271059 26.142118 0 23.762824 0 47.977412 0 255.216941-201.065412 432.007529-480.015058 432.007529z" fill="#6B7280" p-id="16176"></path></svg>
             <span class="sr-only">Feedback</span>
-        </button>
+        </a>
         <div id="tooltip-feedback" role="tooltip" class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
             Feedback
             <div class="tooltip-arrow" data-popper-arrow></div>
@@ -36,6 +36,8 @@
 </div>
 
 <script>
+import { Dial } from 'flowbite';
+document.addEventListener('astro:page-load', () => {
         // parent element wrapping the speed dial
     const $parentEl = document.getElementById('dialParent');
 
@@ -64,7 +66,7 @@
         id: 'dialContent',
         override: true
     };
-    import { Dial } from 'flowbite';
+
     /*
     * $parentEl: required
     * $targetEl: required
@@ -77,11 +79,11 @@
 
 
     // 监听按钮事件
-    const clickHome = document.getElementById('click_home');
-    clickHome?.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.location.href = "/";
-    });
+    // const clickHome = document.getElementById('click_home');
+    // clickHome?.addEventListener('click', (e) => {
+    //     e.preventDefault();
+    //     window.location.href = "/";
+    // });
 
     const clickTop = document.getElementById('click_top');
     clickTop?.addEventListener('click', (e) => {
@@ -89,11 +91,11 @@
         smoothScrollToTop();
     });
 
-    const clickFeedback = document.getElementById('click_feedback');
-    clickFeedback?.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.location.href = "/contact";
-    });
+    // const clickFeedback = document.getElementById('click_feedback');
+    // clickFeedback?.addEventListener('click', (e) => {
+    //     e.preventDefault();
+    //     window.location.href = "/contact";
+    // });
 
 
 
@@ -105,4 +107,5 @@
             window.scrollTo(0, currentScroll - (currentScroll / 8));
         }
     }
+});
 </script>

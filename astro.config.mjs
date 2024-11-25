@@ -7,6 +7,7 @@ import sitemap from '@astrojs/sitemap'
 import partytown from '@astrojs/partytown'
 import { SITE } from './src/config.ts'
 import { remarkReadingTime } from './src/support/time.ts'
+import remarkToc from 'remark-toc'
 
 export default defineConfig({
     // output: 'server',
@@ -35,6 +36,7 @@ export default defineConfig({
     ],
     markdown: {
         remarkPlugins: [remarkReadingTime],
+        remarkPlugins: [ [remarkToc, { ordered: true, tight: false,heading: "目录" }] ],
         shikiConfig: {
             themes: {
                 light: 'dark-plus',

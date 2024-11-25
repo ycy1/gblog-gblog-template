@@ -3,6 +3,7 @@ import { NavigationLinks } from '../config'
 import NavLink from './ui/NavLink.astro'
 import BrandLogo from './logos/BrandLogo.astro'
 import Theme from './logos/Theme.astro';
+import Aplayer from './ui/Aplayer.astro';
 ---
 
 <header class="sticky inset-x-0 top-4 z-50 flex w-full flex-wrap text-sm md:flex-nowrap md:justify-start">
@@ -18,6 +19,7 @@ import Theme from './logos/Theme.astro';
             >
                 <BrandLogo class="h-full w-auto object-cover rounded-full" />
             </a>
+            <Aplayer/>
 
             <div class="ml-auto md:hidden">
                 <button
@@ -80,75 +82,109 @@ import Theme from './logos/Theme.astro';
         </div>
     </nav>
 </header>
-<script is:inline>
-    const HSThemeAppearance = {
-        init() {
-            const defaultTheme = "default";
-            let theme = localStorage.getItem("hs_theme") || defaultTheme;
+<script>
+    import { Popover } from 'flowbite';
+document.addEventListener('astro:page-load', () => {
 
-            if (document.querySelector("html").classList.contains("dark")) {
-                return;
-            }
-
-            this.setAppearance(theme);
+    // 加载音乐盒
+    // set the popover content element
+    const $popoverContent = document.getElementById('popoverContent');
+    // set the element that trigger the popover using hover or click
+    const $popoverButton = document.getElementById('popoverButton');
+    // options with default values
+    const options = {
+        placement: 'bottom',
+        triggerType: 'hover',
+        offset: 10,
+        onHide: () => {
+            console.log('popover is shown');
         },
-
-        _resetStylesOnLoad() {
-            const $resetStyles = document.createElement("style");
-            $resetStyles.innerText = `*{transition: unset !important;}`;
-            $resetStyles.setAttribute("data-hs-appearance-onload-styles", "");
-            document.head.appendChild($resetStyles);
-            return $resetStyles;
+        onShow: () => {
+            console.log('popover is hidden');
         },
-
-        setAppearance(theme, saveInStore = true, dispatchEvent = true) {
-            const $resetStylesEl = this._resetStylesOnLoad();
-
-            if (saveInStore) {
-                localStorage.setItem("hs_theme", theme);
-            }
-
-            if (theme === "auto") {
-                theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "default";
-            }
-
-            document.querySelector("html").classList.remove("dark");
-            document.querySelector("html").classList.remove("default");
-            document.querySelector("html").classList.remove("auto");
-
-            document.querySelector("html").classList.add(this.getOriginalAppearance());
-
-            setTimeout(() => $resetStylesEl.remove());
-
-            if (dispatchEvent) {
-                window.dispatchEvent(new CustomEvent("on-hs-appearance-change", { detail: theme }));
-            }
-        },
-
-        getAppearance() {
-            let theme = this.getOriginalAppearance();
-            if (theme === "auto") {
-                theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "default";
-            }
-
-            return theme;
-        },
-
-        getOriginalAppearance() {
-            const defaultTheme = "default";
-            return localStorage.getItem("hs_theme") || defaultTheme;
+        onToggle: () => {
+            console.log('popover is toggled');
         },
     };
 
-    HSThemeAppearance.init();
+    // instance options object
+    const instanceOptions = {
+        id: 'popoverContent',
+        override: true
+    };
+
+    /*
+    * $targetEl: required
+    * $triggerEl: required
+    * options: optional
+    */
+    const popover = new Popover($popoverContent, $popoverButton, options, instanceOptions);
+
+    function init() {
+        const defaultTheme = "default";
+        let theme = localStorage.getItem("hs_theme") || defaultTheme;
+
+        if (document.querySelector("html").classList.contains("dark")) {
+            return;
+        }
+
+        setAppearance(theme);
+        
+    }
+
+    function _resetStylesOnLoad() {
+        const $resetStyles = document.createElement("style");
+        $resetStyles.innerText = `*{transition: unset !important;}`;
+        $resetStyles.setAttribute("data-hs-appearance-onload-styles", "");
+        document.head.appendChild($resetStyles);
+        return $resetStyles;
+    }
+
+    function setAppearance(theme, saveInStore = true, dispatchEvent = true) {
+        const $resetStylesEl = _resetStylesOnLoad();
+        if (saveInStore) {
+            localStorage.setItem("hs_theme", theme);
+        }
+
+        if (theme === "auto") {
+            theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "default";
+        }
+        
+        document.querySelector("html").classList.remove("dark");
+        document.querySelector("html").classList.remove("default");
+        document.querySelector("html").classList.remove("auto");
+
+        document.querySelector("html").classList.add(getOriginalAppearance());
+
+        setTimeout(() => $resetStylesEl.remove());
+
+        if (dispatchEvent) {
+            window.dispatchEvent(new CustomEvent("on-hs-appearance-change", { detail: theme }));
+        }
+    }
+
+    function getAppearance() {
+        let theme = getOriginalAppearance();
+        if (theme === "auto") {
+            theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "default";
+        }
+
+        return theme;
+    }
+
+    function getOriginalAppearance() {
+        const defaultTheme = "default";
+        return localStorage.getItem("hs_theme") || defaultTheme;
+    }
+
+    init();
 
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
-        if (HSThemeAppearance.getOriginalAppearance() === "auto") {
-            HSThemeAppearance.setAppearance("auto", false);
+        if (getOriginalAppearance() === "auto") {
+            setAppearance("auto", false);
         }
     });
 
-    window.addEventListener("load", () => {
         const $clickableThemes = document.querySelectorAll(
             "[data-hs-theme-click-value]",
         );
@@ -158,7 +194,7 @@ import Theme from './logos/Theme.astro';
 
         $clickableThemes.forEach(($item) => {
             $item.addEventListener("click", () =>
-                HSThemeAppearance.setAppearance(
+                setAppearance(
                     $item.getAttribute("data-hs-theme-click-value"),
                     true,
                     $item,
@@ -168,10 +204,10 @@ import Theme from './logos/Theme.astro';
 
         $switchableThemes.forEach(($item) => {
             $item.addEventListener("change", (e) => {
-                HSThemeAppearance.setAppearance(e.target.checked ? "dark" : "default");
+                setAppearance(e.target.checked ? "dark" : "default");
             });
 
-            $item.checked = HSThemeAppearance.getAppearance() === "dark";
+            $item.checked = getAppearance() === "dark";
         });
 
         window.addEventListener("on-hs-appearance-change", (e) => {
@@ -179,6 +215,6 @@ import Theme from './logos/Theme.astro';
                 $item.checked = e.detail === "dark";
             });
         });
-  });
+});
 </script>
 <script is:inline src="/vendor/preline/collapse2.1.0.min.js"></script>

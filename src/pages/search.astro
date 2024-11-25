@@ -83,7 +83,7 @@ const categories = await getCollection('categories')
 <script>
   import { type CollectionEntry, getCollection } from 'astro:content'
   import Fuse, { type FuseResult } from 'fuse.js';
-
+  document.addEventListener('astro:page-load', () => {
   let categoryStr = "";
   // 分类按钮渲染
   const btns = document.getElementsByClassName('categoryLi');
@@ -267,7 +267,7 @@ const categories = await getCollection('categories')
     return html;
   }
 
-
+});
   
   
 

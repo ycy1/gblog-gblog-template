@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import BaseHead from '@components/BaseHead.astro'
 import Footer from '@components/Footer.astro'
 import Header from '@components/Header.astro'
@@ -6,6 +7,8 @@ import NavSide from '@components/NavSide.astro'
 import NavSide2 from '@components/NavSide2.astro'
 import GoogleAnalytics from '@components/support/GoogleAnalytics.astro'
 import { SITE } from '../config'
+// import { Aplayer_Music } from '../config'
+// const aplayer_music = Aplayer_Music
 
 interface Props {
     title: string
@@ -17,11 +20,13 @@ interface Props {
 
 const { title, description = SITE.description, ogImage, lang = 'en', structuredData } = Astro.props
 const normalizeTitle = !title ? SITE.title : `${title} - ${SITE.title}`
+import { Friends } from '../config'
 ---
 
 <html lang={lang} class="scrollbar-hide lenis lenis-smooth scroll-pt-16">
     <head>
         <title>{normalizeTitle}</title>
+        <ViewTransitions />
         <BaseHead
             title={normalizeTitle}
             description={description}
@@ -30,19 +35,42 @@ const normalizeTitle = !title ? SITE.title : `${title} - ${SITE.title}`
             ogDescription={description}
             structuredData={structuredData}
         />
-        <script is:inline>
-            if (localStorage.getItem("hs_theme") === "dark"
-                || (!("hs_theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-                document.documentElement.classList.add("dark");
-            } else {
-                document.documentElement.classList.remove("dark");
-            }
+        <script>
+           
         </script>
         <script is:inline src="/vendor/lenis/lenis1.0.42.min.js"></script>
         <!-- GrowlNotification 通知 -->
         <script is:inline src="/notice/growl-notification.min.js"></script>
         <link href="/notice/light-theme.min.css" rel="stylesheet">
         <script is:inline>
+            const lenis = new Lenis();
+            function raf(time) {
+                lenis.raf(time)
+                requestAnimationFrame(raf)
+            }
+            requestAnimationFrame(raf)
+        </script>
+        <GoogleAnalytics />
+    </head>
+    <body id="body" class="bg-neutral-200 selection:bg-yellow-400 selection:text-neutral-700 dark:bg-neutral-800">
+        <div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+            <Header />
+            <!-- <div id="aplayer"></div> -->
+            <main id="main">
+                <!-- <div id="aplayer"></div> -->
+                <slot />
+            </main>
+        </div>
+        <Footer />
+        <!-- <NavSide /> -->
+        <NavSide2 />
+    </body>
+
+    <script>
+        import confetti from 'canvas-confetti'
+
+        document.addEventListener('astro:page-load', () => {
+
             const lenis = new Lenis();
             function raf(time) {
                 lenis.raf(time)
@@ -58,88 +86,82 @@ const normalizeTitle = !title ? SITE.title : `${title} - ${SITE.title}`
                 showProgress:true, // 是否显示进度条
                 width:'400px', // 宽度
                 margin: 10, // 间距
-            })
-        </script>
-        <GoogleAnalytics />
-    </head>
-    <body id="body" class="bg-neutral-200 selection:bg-yellow-400 selection:text-neutral-700 dark:bg-neutral-800">
-        <div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
-            <Header />
-            <main id="main">
-                <slot />
-            </main>
-        </div>
-        <Footer />
-        <!-- <NavSide /> -->
-        <NavSide2 />
-
-        <style>
-            .scrollbar-hide::-webkit-scrollbar {
-                display: none;
-            }
-            .scrollbar-hide {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-            }
-            html.lenis,
-            html.lenis body {
-                height: auto;
-            }
-            .lenis.lenis-smooth {
-                scroll-behavior: auto !important;
-            }
-            .lenis.lenis-smooth [data-lenis-prevent] {
-                overscroll-behavior: contain;
-            }
-            .lenis.lenis-stopped {
-                overflow: hidden;
-            }
-            .lenis.lenis-scrolling iframe {
-                pointer-events: none;
-            }
-        </style>
-    </body>
-
-    <script>
-        import confetti from 'canvas-confetti'
-        // confetti({ particleCount: 100, angle: 120, spread: 60 });
-        // 获取元素
-        var element = document.getElementById('body');
-        
-        // 页面点击事件触发烟花
-        element.addEventListener('click', (e) => {
-            let x = e.clientX; // 获取鼠标点击的X坐标
-            let y = e.clientY; // 获取鼠标点击的Y坐标
-            const width = window.innerWidth; // 获取视口宽度
-            const height = window.innerHeight; // 获取视口高度
-            const left = window.screenLeft; // 获取视口宽度
-            const top = window.screenTop; // 获取视口高度
-            x = (e.clientX  - left) / width;
-            y = (e.clientY  - top) / height;
-            // console.log(x, y);
-            // var pineapple = confetti.shapeFromText({ text: '❤️', scalar :20 });
-            // 调用 confetti 函数，设置烟花的起始位置
-            confetti({
-                particleCount: 100, // 每次发射的烟花数量
-                spread: 360, // 烟花的散开度
-                ticks: 40, // 烟花的持续时间
-                decay: 0.94, // 烟花的衰减系数
-                startVelocity: 30, // 烟花的初始速度
-                gravity: 0.2, // 烟花的重力
-                tilt: 90, // 烟花的倾斜角度
-                isPaused: false, // 是否暂停
-                shapes: ['star'], // 烟花的形状
-                scalar: 1.2, // 烟花的缩放比例
-                origin:{
-                    x: x, // 烟花的起始X坐标
-                    y: y, // 烟花的起始Y坐标
-                },
-                // x: x, // 烟花的起始X坐标
-                // y: y, // 烟花的起始Y坐标
-                width: width-500, // 烟花的容器宽度
-                height: height-500, // 烟花的容器高度
-                colors: ['#ff5858', '#ffae29', '#29ff3e', '#2997ff', '#f229ff'], // 烟花的颜色
             });
+
+            if (localStorage.getItem("hs_theme") === "dark"
+                || (!("hs_theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.classList.add("dark");
+            } else {
+                document.documentElement.classList.remove("dark");
+            }
+
+
+            // confetti({ particleCount: 100, angle: 120, spread: 60 });
+            // 获取元素
+            var element = document.getElementById('body');
+            
+            // 页面点击事件触发烟花
+            element.addEventListener('click', (e) => {
+                let x = e.clientX; // 获取鼠标点击的X坐标
+                let y = e.clientY; // 获取鼠标点击的Y坐标
+                const width = window.innerWidth; // 获取视口宽度
+                const height = window.innerHeight; // 获取视口高度
+                const left = window.screenLeft; // 获取视口宽度
+                const top = window.screenTop; // 获取视口高度
+                x = (e.clientX  - left) / width;
+                y = (e.clientY  - top) / height;
+                // console.log(x, y);
+                // var pineapple = confetti.shapeFromText({ text: '❤️', scalar :20 });
+                // 调用 confetti 函数，设置烟花的起始位置
+                confetti({
+                    particleCount: 100, // 每次发射的烟花数量
+                    spread: 360, // 烟花的散开度
+                    ticks: 40, // 烟花的持续时间
+                    decay: 0.94, // 烟花的衰减系数
+                    startVelocity: 30, // 烟花的初始速度
+                    gravity: 0.2, // 烟花的重力
+                    tilt: 90, // 烟花的倾斜角度
+                    isPaused: false, // 是否暂停
+                    shapes: ['star'], // 烟花的形状
+                    scalar: 1.2, // 烟花的缩放比例
+                    origin:{
+                        x: x, // 烟花的起始X坐标
+                        y: y, // 烟花的起始Y坐标
+                    },
+                    // x: x, // 烟花的起始X坐标
+                    // y: y, // 烟花的起始Y坐标
+                    width: width-500, // 烟花的容器宽度
+                    height: height-500, // 烟花的容器高度
+                    colors: ['#ff5858', '#ffae29', '#29ff3e', '#2997ff', '#f229ff'], // 烟花的颜色
+                });
+            });
+
         });
+        
     </script>
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        html.lenis,
+        html.lenis body {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+    </style>
 </html>
