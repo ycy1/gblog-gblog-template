@@ -8,7 +8,6 @@ cardImage2: "@images/banners/Drizzle-Kit.jpeg"
 tags: ["Drizzle", "Orm"]
 selected: false
 ---
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=80% height=86 src="//music.163.com/outchain/player?type=2&id=548885986&auto=1&height=66"></iframe>
 
 ## 目录
 
