@@ -24,10 +24,11 @@ const result = Astro.getActionResult(actions.logout);
     <div data-popper-arrow></div>
 </div>
 
-<link href="/vendor/APlayer.min.css" rel="stylesheet">
+<script is:inline src="/vendor/aplayer/APlayer.min.js"></script>
+<link href="/vendor/aplayer/APlayer.min.css" rel="stylesheet">
 <script>
     // import '/vendor/APlayer.min.css';
-    import APlayer from 'APlayer';
+    // import APlayer from 'APlayer';
 
     document.addEventListener('astro:page-load', () => {
         console.log('APlayer');
