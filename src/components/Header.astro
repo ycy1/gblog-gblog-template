@@ -24,12 +24,12 @@ import Aplayer from './ui/Aplayer.astro';
             <div class="ml-auto md:hidden">
                 <button
                     type="button"
+                    id="navButton"
                     class="hs-collapse-toggle flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-neutral-600 transition duration-300 hover:bg-neutral-200 disabled:pointer-events-none disabled:opacity-50 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:outline-none"
-                    data-hs-collapse="#navbar-collapse-with-animation"
-                    aria-controls="navbar-collapse-with-animation"
+                    
                     aria-label="Toggle navigation"
                 >
-                    <svg
+                    <svg id="navButtonOpen"
                         class="h-[1.25rem] w-[1.25rem] flex-shrink-0 hs-collapse-open:hidden"
                         width="24"
                         height="24"
@@ -45,6 +45,7 @@ import Aplayer from './ui/Aplayer.astro';
                         <line x1="3" x2="21" y1="18" y2="18"></line>
                     </svg>
                     <svg
+                    id="navButtonClose"
                         class="hidden h-[1.25rem] w-[1.25rem] flex-shrink-0 hs-collapse-open:block"
                         width="24"
                         height="24"
@@ -214,6 +215,15 @@ document.addEventListener('astro:page-load', () => {
             $switchableThemes.forEach(($item) => {
                 $item.checked = e.detail === "dark";
             });
+        });
+
+        document.getElementById("navButton")?.addEventListener("click", function () {
+            // this.classList.toggle("open");
+            document.getElementById("navButtonOpen")?.classList.toggle("hidden");
+            document.getElementById("navButtonClose")?.classList.toggle("hidden");
+            document.getElementById("navbar-collapse-with-animation")?.classList.toggle("hidden");
+            // document.getElementById("navbar-collapse-with-animation").style.transitionDuration = "0.5s";
+            
         });
 });
 </script>

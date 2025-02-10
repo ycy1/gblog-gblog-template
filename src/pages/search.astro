@@ -23,9 +23,12 @@ const categories = await getCollection('categories')
             stroke-width="2" d="m1 1 4 4 4-4" />
           </svg>
         </button>
-        <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-52 dark:bg-gray-700">
+        <div id="dropdown" style="position: absolute;
+          inset: 0px auto auto -20px;
+          margin: 0px;
+          transform: translate3d(106.4px, 183.2px, 0px);" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-52 dark:bg-gray-700">
           <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
-            <a href="#" title="clear" data-category="clear" class="categoryLi">
+            <a title="clear" data-category="clear" class="categoryLi">
               <li class="truncate border-b mx-1 rounded-sm border-gray-300 dark:border-gray-600 py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                 <button type="button" class="w-4/5 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Clear</button>
               </li>
@@ -34,7 +37,7 @@ const categories = await getCollection('categories')
             {
               categories.map((category) => {
                 return (
-                <a href="#" title={category.data.title} data-category={category.slug} class="categoryLi">
+                <a title={category.data.title} data-category={category.slug} class="categoryLi" style="cursor: pointer;">
                   <li class="truncate border-b mx-1 rounded-sm border-gray-300 dark:border-gray-600 py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                       {category.data.title}
                   </li>
@@ -84,6 +87,22 @@ const categories = await getCollection('categories')
   import { type CollectionEntry, getCollection } from 'astro:content'
   import Fuse, { type FuseResult } from 'fuse.js';
   document.addEventListener('astro:page-load', () => {
+    
+  const dropdownButton = document.getElementById("dropdown-button");
+  const dropdown = document.getElementById("dropdown");
+  dropdownButton?.addEventListener("click", (event) => {
+    dropdown?.classList.toggle("hidden");
+    event.stopPropagation(); // 阻止事件冒泡
+  });
+  document.addEventListener('click', function(event) {
+    dropdown?.classList.add("hidden");
+  });
+  // dropdown?.addEventListener("click", (event) => {
+  //   event.stopPropagation(); // 阻止事件冒泡
+  // });
+
+
+
   let categoryStr = "";
   // 分类按钮渲染
   const btns = document.getElementsByClassName('categoryLi');

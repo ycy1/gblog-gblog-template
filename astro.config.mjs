@@ -35,8 +35,7 @@ export default defineConfig({
         }),
     ],
     markdown: {
-        remarkPlugins: [remarkReadingTime],
-        remarkPlugins: [ [remarkToc, { ordered: true, tight: false,heading: "目录" }] ],
+        remarkPlugins: [ [remarkToc, { ordered: true, tight: true ,maxDepth : 2 ,heading: "目录" }],remarkReadingTime ],
         shikiConfig: {
             themes: {
                 light: 'dark-plus',

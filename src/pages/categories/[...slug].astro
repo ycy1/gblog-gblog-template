@@ -67,33 +67,37 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
 </BaseLayout>
 
 <script>
-    // 图标
-    const list = document.getElementById('list')
-    const card = document.getElementById('card')
-    // 内容
-    const listBlog = document.getElementById('listBlog')
-    const cardBlog = document.getElementById('cardBlog')
+    document.addEventListener('astro:page-load', () => {
+            // 图标
+        const list = document.getElementById('list')
+        const card = document.getElementById('card')
+        // 内容
+        const listBlog = document.getElementById('listBlog')
+        const cardBlog = document.getElementById('cardBlog')
 
-    listBlog?.setAttribute("style","display:none")
-    card?.setAttribute("style","display:none")
+        listBlog?.setAttribute("style","display:none")
+        card?.setAttribute("style","display:none")
 
-    if(list){
-        list.addEventListener('click', function(event) {
-            list?.setAttribute("style","display:none")
-            listBlog?.setAttribute("style","display:block")
+        if(list){
+            list.addEventListener('click', function(event) {
+                list?.setAttribute("style","display:none")
+                listBlog?.setAttribute("style","display:block")
 
-            card?.setAttribute("style","display:flex")
-            cardBlog?.setAttribute("style","display:none")
-            
-        })
-    }
+                card?.setAttribute("style","display:flex")
+                cardBlog?.setAttribute("style","display:none")
+                
+            })
+        }
 
-    if(card){
-        card.addEventListener('click', function(event) {
-            card?.setAttribute("style","display:none")
-            cardBlog?.setAttribute("style","display:grid")
-            list?.setAttribute("style","display:flex")
-            listBlog?.setAttribute("style","display:none")
-        })
-    }
+        if(card){
+            card.addEventListener('click', function(event) {
+                card?.setAttribute("style","display:none")
+                cardBlog?.setAttribute("style","display:grid")
+                list?.setAttribute("style","display:flex")
+                listBlog?.setAttribute("style","display:none")
+            })
+        }
+
+    });
+    
 </script>

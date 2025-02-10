@@ -14,6 +14,6 @@ export default defineConfig({
     // host: import.meta.env.MYSQL_HOST,
     // port: import.meta.env.MYSQL_PORT,
     // database: import.meta.env.MYSQL_DB,
-    url: `mysql://root:03171122991Xxj!@112.124.40.67:3306/xxj_gblog`,
+    url: `mysql://root:03171122991j!@182.92.85.80:3306/xxj_gblog`,
   }
 })
