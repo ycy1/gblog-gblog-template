@@ -1,26 +1,32 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import BaseHead from '@components/BaseHead.astro'
-import Footer from '@components/Footer.astro'
-import Header from '@components/Header.astro'
-import NavSide from '@components/NavSide.astro'
-import NavSide2 from '@components/NavSide2.astro'
-import GoogleAnalytics from '@components/support/GoogleAnalytics.astro'
-import { SITE } from '../config'
+import BaseHead from "@components/BaseHead.astro";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import NavSide from "@components/NavSide.astro";
+import NavSide2 from "@components/NavSide2.astro";
+import GoogleAnalytics from "@components/support/GoogleAnalytics.astro";
+import { SITE } from "../config";
 // import { Aplayer_Music } from '../config'
 // const aplayer_music = Aplayer_Music
 
 interface Props {
-    title: string
-    description: string
-    ogImage?: any
-    lang?: string
-    structuredData?: object
+    title: string;
+    description: string;
+    ogImage?: any;
+    lang?: string;
+    structuredData?: object;
 }
 
-const { title, description = SITE.description, ogImage, lang = 'en', structuredData } = Astro.props
-const normalizeTitle = !title ? SITE.title : `${title} - ${SITE.title}`
-import { Friends } from '../config'
+const {
+    title,
+    description = SITE.description,
+    ogImage,
+    lang = "en",
+    structuredData,
+} = Astro.props;
+const normalizeTitle = !title ? SITE.title : `${title} - ${SITE.title}`;
+import { Friends } from "../config";
 ---
 
 <html lang={lang} class="scrollbar-hide lenis lenis-smooth scroll-pt-16">
@@ -31,28 +37,29 @@ import { Friends } from '../config'
             title={normalizeTitle}
             description={description}
             ogImage={ogImage}
-            ogTitle={title === '' ? SITE.title : title}
+            ogTitle={title === "" ? SITE.title : title}
             ogDescription={description}
             structuredData={structuredData}
         />
-        <script>
-           
-        </script>
+        <script></script>
         <script is:inline src="/vendor/lenis/lenis1.0.42.min.js"></script>
         <!-- GrowlNotification 通知 -->
         <script is:inline src="/notice/growl-notification.min.js"></script>
-        <link href="/notice/light-theme.min.css" rel="stylesheet">
+        <link href="/notice/light-theme.min.css" rel="stylesheet" />
         <script is:inline>
             const lenis = new Lenis();
             function raf(time) {
-                lenis.raf(time)
-                requestAnimationFrame(raf)
+                lenis.raf(time);
+                requestAnimationFrame(raf);
             }
-            requestAnimationFrame(raf)
+            requestAnimationFrame(raf);
         </script>
         <GoogleAnalytics />
     </head>
-    <body id="body" class="bg-neutral-200 selection:bg-yellow-400 selection:text-neutral-700 dark:bg-neutral-800">
+    <body
+        id="body"
+        class="bg-neutral-200 selection:bg-yellow-400 selection:text-neutral-700 dark:bg-neutral-800"
+    >
         <div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
             <Header />
             <!-- <div id="aplayer"></div> -->
@@ -64,52 +71,51 @@ import { Friends } from '../config'
         <Footer />
         <!-- <NavSide /> -->
         <NavSide2 />
-    </body>
+    </body><script>
+        import confetti from "canvas-confetti";
 
-    <script>
-        import confetti from 'canvas-confetti'
-
-        document.addEventListener('astro:page-load', () => {
-
+        document.addEventListener("astro:page-load", () => {
             const lenis = new Lenis();
             function raf(time) {
-                lenis.raf(time)
-                requestAnimationFrame(raf)
+                lenis.raf(time);
+                requestAnimationFrame(raf);
             }
-            requestAnimationFrame(raf)
+            requestAnimationFrame(raf);
 
             // GrowlNotification 全局配置
             GrowlNotification.setGlobalOptions({
-                title: '消息通知',
-                position: 'top-center', // 位置
-                closeTimeout:3000, // 显示时间
-                showProgress:true, // 是否显示进度条
-                width:'400px', // 宽度
-                margin: 10, // 间距
+                title: "消息通知",
+                position: "top-center", // 位置
+                closeTimeout: 3000, // 显示时间
+                showProgress: true, // 是否显示进度条
+                width: "400px", // 宽度
+                margin: 10, // 间距
             });
 
-            if (localStorage.getItem("hs_theme") === "dark"
-                || (!("hs_theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+            if (
+                localStorage.getItem("hs_theme") === "dark" ||
+                (!("hs_theme" in localStorage) &&
+                    window.matchMedia("(prefers-color-scheme: dark)").matches)
+            ) {
                 document.documentElement.classList.add("dark");
             } else {
                 document.documentElement.classList.remove("dark");
             }
 
-
             // confetti({ particleCount: 100, angle: 120, spread: 60 });
             // 获取元素
-            var element = document.getElementById('body');
-            
+            var element = document.getElementById("body");
+
             // 页面点击事件触发烟花
-            element.addEventListener('click', (e) => {
+            element.addEventListener("click", (e) => {
                 let x = e.clientX; // 获取鼠标点击的X坐标
                 let y = e.clientY; // 获取鼠标点击的Y坐标
                 const width = window.innerWidth; // 获取视口宽度
                 const height = window.innerHeight; // 获取视口高度
                 const left = window.screenLeft; // 获取视口宽度
                 const top = window.screenTop; // 获取视口高度
-                x = (e.clientX  - left) / width;
-                y = (e.clientY  - top) / height;
+                x = (e.clientX - left) / width;
+                y = (e.clientY - top) / height;
                 // console.log(x, y);
                 // var pineapple = confetti.shapeFromText({ text: '❤️', scalar :20 });
                 // 调用 confetti 函数，设置烟花的起始位置
@@ -122,22 +128,26 @@ import { Friends } from '../config'
                     gravity: 0.2, // 烟花的重力
                     tilt: 90, // 烟花的倾斜角度
                     isPaused: false, // 是否暂停
-                    shapes: ['star'], // 烟花的形状
+                    shapes: ["star"], // 烟花的形状
                     scalar: 1.2, // 烟花的缩放比例
-                    origin:{
+                    origin: {
                         x: x, // 烟花的起始X坐标
                         y: y, // 烟花的起始Y坐标
                     },
                     // x: x, // 烟花的起始X坐标
                     // y: y, // 烟花的起始Y坐标
-                    width: width-500, // 烟花的容器宽度
-                    height: height-500, // 烟花的容器高度
-                    colors: ['#ff5858', '#ffae29', '#29ff3e', '#2997ff', '#f229ff'], // 烟花的颜色
+                    width: width - 500, // 烟花的容器宽度
+                    height: height - 500, // 烟花的容器高度
+                    colors: [
+                        "#ff5858",
+                        "#ffae29",
+                        "#29ff3e",
+                        "#2997ff",
+                        "#f229ff",
+                    ], // 烟花的颜色
                 });
             });
-
         });
-        
     </script>
     <style>
         .scrollbar-hide::-webkit-scrollbar {
@@ -162,6 +172,9 @@ import { Friends } from '../config'
         }
         .lenis.lenis-scrolling iframe {
             pointer-events: none;
+        }
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </html>

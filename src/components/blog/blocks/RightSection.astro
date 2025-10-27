@@ -26,6 +26,8 @@ interface Props {
     imgOneAlt?: any
     imgTwo?: any
     imgTwoAlt?: any
+    img: string
+    imgAlt: string
 }
 ---
 
@@ -34,7 +36,7 @@ interface Props {
         <h2 class="mb-4 text-balance text-4xl font-extrabold tracking-tight text-neutral-800 dark:text-neutral-200">
             {title}
         </h2>
-        <p class="mb-4 max-w-prose text-pretty font-light text-neutral-600 dark:text-neutral-400 sm:text-lg">
+        <p class="mb-4 line-clamp-2 max-w-prose text-pretty font-light text-neutral-600 dark:text-neutral-400 sm:text-lg">
             {subTitle}
         </p>
         {
@@ -47,11 +49,13 @@ interface Props {
             ? (
                 <div class="mt-8">
                     <Image
-                        class="w-full rounded-lg"
+                        class="w-full object-cover aspect-[10/5] rounded-lg"
                         src={imgOne}
                         alt={imgOneAlt}
                         format="avif"
                         loading="lazy"
+                        width={500}
+                        height={300}
                     />
                 </div>
             )

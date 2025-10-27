@@ -102,7 +102,8 @@ document.addEventListener('astro:page-load', () => {
     // 平滑滚动到页面顶部
     function smoothScrollToTop() {
         const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
-        if (currentScroll > 0) {
+        // >10 去除误差，避免无限循环
+        if (currentScroll > 10) {
             window.requestAnimationFrame(smoothScrollToTop);
             window.scrollTo(0, currentScroll - (currentScroll / 8));
         }

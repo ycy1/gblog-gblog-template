@@ -6,12 +6,18 @@ import MainSection from '@components/blocks/MainSection.astro'
 import BlogRecentCard from '@components/blog/BlogRecentCard.astro'
 import BlogSelectedArticle from '@components/blog/BlogSelectedArticle.astro'
 import { SITE } from '../../config'
+import { getArticlesApi ,getRecommendArticlesApi} from "@api/article"
 
 const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
     (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 )
 
+const articles = await getArticlesApi()
+const recentPosts = articles.data.records.slice(0, 3) // 显示前3个
+
 const selectedPosts: CollectionEntry<'posts'>[] = posts.filter(p => p.data.selected)
+
+const recommendPosts = await getRecommendArticlesApi()
 const description = 'Here are some articles that Godruoyi believes are not bad, hope you enjoy them.'
 const URL = Astro.url.href
 ---
@@ -43,7 +49,7 @@ const URL = Astro.url.href
         btnURL="/timeline"
     />
 
-    <BlogRecentCard blogs={posts} />
-    <BlogSelectedArticle posts={selectedPosts} />
+    <BlogRecentCard blogs={recentPosts} />
+    <BlogSelectedArticle posts={recommendPosts.data} />
 </BaseLayout>
 

@@ -1,18 +1,14 @@
 ---
-import type { CollectionEntry } from 'astro:content'
 import { Image } from 'astro:assets'
 import { formatDate } from '../../support/time'
 
 const { blog } = Astro.props
 
-interface Props {
-    blog: CollectionEntry<'posts'>
-}
 ---
 
 
 <a  class="group"
-    href={`/posts/${blog.slug}/`}
+    href={`/posts/detail/${blog.id}/`}
     data-astro-prefetch
 >
     <div class="border-b border-gray-300 dark:border-gray-600 pt-10 pb-5">
@@ -21,29 +17,31 @@ interface Props {
             <div class="flex-shrink-0">
                 <Image
                     class="w-8 h-8 rounded-full  start-0 top-0 size-full object-cover transition duration-550 group-hover:scale-150"
-                    src={blog.data.cardImage}
-                    alt={blog.data.title}
+                    src={blog.cover}
+                    alt={blog.title}
                     draggable="false"
                     loading="eager"
+                    width={100}
+                    height={100}
                 />
             </div>
             <div class="flex-1 min-w-0">
                 <div class="flex items-center">
                     <p class="text-lg font-semibold text-gray-900 truncate group-hover:text-orange-500 dark:text-white dark:group-hover:text-orange-500">
-                        {blog.data.title}
+                        {blog.title}
                     </p>
                 </div>
                 
-                <p title={blog.data.description} class="text-sm text-gray-500 truncate dark:text-gray-400">
-                    {blog.data.description}
+                <p title={blog.summary} class="text-sm text-gray-500 truncate dark:text-gray-400">
+                    {blog.summary}
                 </p>
             </div>
             <div class="text-right text-sm pt-5 text-gray-500 dark:text-gray-400">
-                <p>{formatDate(blog.data.pubDate)}</p>
+                <p>{formatDate(blog.createTime)}</p>
                 <div class="mt-2">
                     {
-                        blog.data.tags?.map((tag) => (
-                        <span class="bg-orange-300 group-hover:bg-orange-400 text-white text-xs font-medium ms-2 px-2.5 py-0.5 rounded dark:bg-orange-500 dark:group-hover:bg-orange-700">{tag}</span>
+                        blog.tags?.map((tag: { name: string }) => (
+                        <span class="bg-orange-300 group-hover:bg-orange-400 text-white text-xs font-medium ms-2 px-2.5 py-0.5 rounded dark:bg-orange-500 dark:group-hover:bg-orange-700">{tag.name}</span>
                         ))
                     }
                 </div>

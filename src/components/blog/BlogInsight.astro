@@ -1,26 +1,25 @@
 ---
 import Icon from '@components/icons/icon.astro'
-import type { CollectionEntry } from 'astro:content'
 import { Image } from 'astro:assets'
 
 const { blog } = Astro.props
 
-interface Props {
-    blog: CollectionEntry<'posts'>
-}
+
 ---
 
 <a
     class="group outline-none rounded-xl ring-zinc-500 transition duration-300 focus-visible:ring dark:ring-zinc-200 dark:focus:outline-none"
-    href={`/posts/${blog.slug}/`}
+    href={`/posts/detail/${blog.id}`}
 >
     <div class="aspect-w-16 aspect-h-10 relative overflow-hidden rounded-xl ">
         <Image
             class="h-full sm:h-[220px] md:h-[240px] w-full object-cover rounded-xl transition duration-500 ease-in-out group-hover:scale-105"
-            src={blog.data.cardImage}
-            alt={blog.data.title}
+            src={blog.cover}
+            alt={blog.title}
             format="avif"
             loading="lazy"
+            width={800}
+            height={800}
         />
     </div>
 
@@ -28,11 +27,11 @@ interface Props {
         <h3
             class="text-xl font-bold text-neutral-800 group-hover:text-neutral-600 dark:text-neutral-200 dark:group-hover:text-neutral-400"
         >
-            {blog.data.title}
+            {blog.title}
          </h3>
 
         <p class="line-clamp-2 mt-3 text-neutral-600 dark:text-neutral-400">
-          {blog.data.description}
+          {blog.summary}
         </p>
 
         <p

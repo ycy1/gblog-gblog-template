@@ -2,7 +2,9 @@ import type { NavigationLink, Site, User } from './types.ts'
 
 export const SITE: Site = {
     author: 'XXj',
-    url: 'https://xxjgbloggood.netlify.app/',
+    url: 'http://182.92.85.80:6000',
+    logo: 'http://182.92.85.80/group1/M00/00/05/tlxVUGjniRKAC6i9AAAOMiUEpTc14.webp',
+    homeHeroImg: 'http://182.92.85.80/group1/M00/00/05/tlxVUGj9t86AZx9WAASzlkOyCvc691.png',
     title: 'Gblog',
     description: 'Gblog是一个开源的、简单的、漂亮的博客，用Astro',
     shortDescription: '',

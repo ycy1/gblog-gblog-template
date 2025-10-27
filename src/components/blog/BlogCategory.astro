@@ -1,9 +1,9 @@
 ---
 
-const { slug, title, description, count, publishDate, isHot } = Astro.props
+const { id, title, description, count, publishDate, isHot } = Astro.props
 
 interface Props {
-    slug: string
+    id: string
     title: string
     description: string
     count: number
@@ -12,7 +12,7 @@ interface Props {
 }
 ---
 
-<a href=`/categories/${slug}` class="flex flex-col justify-between size-full bg-neutral-100 shadow-lg rounded-lg p-5 dark:bg-neutral-900/30 group">
+<a href={`/categories/detail/${id}?title=${title}&description=${description}`} class="flex flex-col justify-between size-full bg-neutral-100 shadow-lg rounded-lg p-5 dark:bg-neutral-900/30 group">
     
     
     

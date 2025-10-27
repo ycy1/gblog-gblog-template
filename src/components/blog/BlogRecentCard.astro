@@ -1,45 +1,40 @@
 ---
-import type { CollectionEntry } from 'astro:content'
 import LeftSection from './blocks/LeftSection.astro'
 import RightSection from './blocks/RightSection.astro'
 
 const { blogs } = Astro.props
 
-interface Props {
-    blogs: CollectionEntry<'posts'>[]
-}
-
-const posts = blogs.slice(0, 3) // 显示前3个
 ---
 
 
 {
-    posts.map((b, index) => index % 2 === 0
+    // @ts-ignore
+    blogs.map((b, index) => index % 2 === 0
         ? (
             <LeftSection
-                title={b.data.title}
-                subTitle={b.data.description}
+                title={b.title}
+                subTitle={b.summary}
                 btnExists={true}
                 btnTitle="阅读更多"
-                btnURL=`/posts/${b.slug}`
-                img={b.data.cardImage}
-                imgAlt={b.data.title}
+                btnURL={`/posts/detail/${b.id}`}
+                img={b.cover}
+                imgAlt={b.title}
             />
         )
         : (
             <RightSection
-                title={b.data.title}
-                subTitle={b.data.description}
+                title={b.title}
+                subTitle={b.summary}
                 btnExists={true}
                 btnTitle="阅读更多"
-                btnURL=`/posts/${b.slug}`
-                img={b.data.cardImage}
-                imgAlt={b.data.title}
-                single={!b.data.cardImage2}
-                imgOne={b.data.cardImage}
-                imgOneAlt={b.data.title}
-                imgTwo={b.data?.cardImage2}
-                imgTwoAlt={b.data.title}
+                btnURL={`/posts/detail/${b.id}`}
+                img={b.cover}
+                imgAlt={b.title}
+                single={!b.cardImage2}
+                imgOne={b.cover}
+                imgOneAlt={b.title}
+                imgTwo={b.cardImage2}
+                imgTwoAlt={b.title}
             />
         ))
 }

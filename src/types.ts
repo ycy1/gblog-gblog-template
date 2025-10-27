@@ -1,6 +1,8 @@
 export interface Site {
     title: string
     author: string
+    logo: string
+    homeHeroImg: string
     url: string
     description: string
     shortDescription: string

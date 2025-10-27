@@ -1,12 +1,14 @@
 ---
 import { Image } from 'astro:assets'
-import logo from '@images/avataaars.jpg'
 import { SITE } from '../../config';
+
 ---
 <Image
-    src={logo}
+    src={SITE.logo}
     alt={SITE.title}
     {...Astro.props}
+    width={180}
+    height={180}
     draggable="false"
     loading="eager"
 />

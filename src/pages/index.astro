@@ -1,21 +1,19 @@
 ---
-import { getCollection } from 'astro:content'
-import type { CollectionEntry } from 'astro:content'
+
 import BaseLayout from '@layouts/BaseLayout.astro'
 import HeroSection from '@components/blocks/HeroSection.astro'
 import BlogInsight from '@components/blog/BlogInsight.astro'
 import FeaturesSection from '@components/blocks/FeaturesSection.astro'
 import HeroSectionAlt from '@components/blocks/HeroSectionAlt.astro'
-import blogHeroImg from '@images/hero-landing.png'
+import {SITE} from '../config'
+import { getArticlesApi } from '@api/article'
 
 import { db } from "@db/config"
 import * as schema from "@db/schema";
 import { sql } from 'drizzle-orm'
 
-// 通过 getCollection 集合获取 获取所有文章 按时间排序 获取前 3 篇文章
-const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
-    (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-).slice(0, 3);
+const articles = await getArticlesApi()
+const recentPosts = articles.data.records.slice(0, 3) // 显示前3个
 
 
 
@@ -23,44 +21,27 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
 // console.log(q);
 
 ---
-
 <BaseLayout>
 
-    <HeroSection
-        title=`Hello, <span class="text-yellow-400 dark:text-yellow-400">GBlog</span>`
-        subTitle="嗨，欢迎来到 Gblog，gblog 是一个用 Astro 构建的开源、简单、美观的博客。"
-        primaryBtn="浏览博客"
-        primaryBtnURL="/posts"
-        src={blogHeroImg}
-        alt="godruoyi's blog"
-    />
-    
-    <FeaturesSection />
+        <HeroSection title={`Hello, <span class="text-yellow-400 dark:text-yellow-400">GBlog</span>`} subTitle="嗨，欢迎来到 Gblog，gblog 是一个用 Astro 构建的开源、简单、美观的博客。" primaryBtn="浏览博客" primaryBtnURL="/posts" src={SITE.homeHeroImg} alt="godruoyi's blog" />
+
+        <FeaturesSection />
 
 
-    <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
-        <div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
-            <h2 class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 md:text-4xl md:leading-tight">
-                最新文章
-            </h2>
-            </h2>
+        <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+            <div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
+                <h2 class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 md:text-4xl md:leading-tight">
+                    最新文章
+                </h2>
+            </div>
             <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">
                 总是想写点什么，但很少真正去做
             </p>
-        </div>
+        </section>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {
-                posts.map(b => (
-                    <BlogInsight blog={b} />
-                ))
-            }
+            {recentPosts.map(b => (
+                <Fragment><BlogInsight blog={b} /></Fragment>
+            ))}
         </div>
-    </section>
-    
-
-    <HeroSectionAlt
-        title="在 GitHub 上与我同行"
-        subTitle="我喜欢开源，我的 GitHub 上有一些小工具。你可以通过查看我的代码来获得更多"
-        url="https://github.com/ycy1/gblog-gblog-template"
-    />
+    <HeroSectionAlt title="在 GitHub 上与我同行" subTitle="我喜欢开源，我的 GitHub 上有一些小工具。你可以通过查看我的代码来获得更多" url="https://github.com/ycy1/gblog-gblog-template" /></>
 </BaseLayout>

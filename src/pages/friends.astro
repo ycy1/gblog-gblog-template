@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro'
 import MainSection from '@components/blocks/MainSection.astro'
+// @ts-ignore
 import { Friends } from '../config'
 
 const friends = Friends
@@ -12,6 +13,7 @@ const friends = Friends
     <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 mb-10 2xl:max-w-full">
         <div class="grid gap-6 grid-cols-1 lg:grid-cols-3 sm:grid-cols-2">
             {
+                // @ts-ignore
                 friends.map(f => (
                     <div class="flex flex-col justify-between rounded-xl p-4 md:p-6 bg-white dark:bg-neutral-900/30">
                         <div>
@@ -68,7 +70,7 @@ const friends = Friends
                                 f.social?.twitter && (
                                     <a
                                         class="shadow-md inline-flex justify-center items-center size-8 text-sm font-semibold rounded-lg border border-gray-300 text-gray-500 hover:text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:text-neutral-300 dark:border-neutral-800 dark:hover:bg-neutral-700"
-                                        href=`https://twitter.com/${f.social.twitter}`
+                                        href={`https://twitter.com/${f.social.twitter}`}
                                         target="_blank"
                                     >
                                         <svg
@@ -93,7 +95,7 @@ const friends = Friends
                                 f.social?.github && (
                                     <a
                                         class="shadow-md inline-flex justify-center items-center size-8 text-sm font-semibold rounded-lg border border-gray-300 text-gray-500 hover:text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:text-neutral-300 dark:border-neutral-800 dark:hover:bg-neutral-700"
-                                        href=`https://github.com/${f.social.github}`
+                                        href={`https://github.com/${f.social.github}`}
                                         target="_blank"
                                     >
                                         <svg

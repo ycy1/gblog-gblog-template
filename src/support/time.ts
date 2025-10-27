@@ -20,6 +20,7 @@ const TimeAgoConfiguration: string[][] = [
 ]
 
 function formatDate(date: Date): string {
+    date instanceof Date || (date = new Date(date)) // 确保 date 是 Date 对象
     const year = date.getFullYear()
     const month = String(date.getMonth() + 1).padStart(2, '0')
     const day = String(date.getDate()).padStart(2, '0')
@@ -64,4 +65,10 @@ function remarkReadingTime() {
     }
 }
 
-export { formatDate, timeago, formatDateFull, remarkReadingTime }
+
+function remarkReadingTime2(text:string) {
+    // eslint-disable-next-line ts/ban-ts-comment
+    return getReadingTime(text)
+}
+
+export { formatDate, timeago, formatDateFull, remarkReadingTime, remarkReadingTime2 }

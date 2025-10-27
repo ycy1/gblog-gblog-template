@@ -5,6 +5,7 @@
     "baseUrl": "src",
     "paths": {
       "@src/*": ["src/*"],
+      "@api/*": ["api/*"],
       "@components/*": ["components/*"],
       "@content/*": ["content/*"],
       "@layouts/*": ["layouts/*"],
@@ -13,6 +14,7 @@
       "@db/*": ["db_config/*"],
       "@message/*": ["message/*"],
       "@files/*": ["files/*"],
+      "@support/*": ["support/*"],
     },
   }
 }

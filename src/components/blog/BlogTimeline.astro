@@ -1,32 +1,33 @@
 ---
-import type { CollectionEntry } from 'astro:content'
 import { formatDate } from 'support/time.ts'
+import { queryTimelineArticlesApi } from '@api/article'
 const { blog } = Astro.props
+const timeline = await queryTimelineArticlesApi(blog.date)
 
-interface Props {
-    blog: CollectionEntry<'posts'>
-}
-// console.log(formatDate(blog.data.pubDate));
 
 ---
 
 <div class="max-w-3xl mx-auto">
-    <div class="flex gap-x-2">
-        <div class="relative -ml-2 last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200 dark:after:bg-neutral-700 after:bg-neutral-400">
-            <div class="relative z-10 size-7 flex justify-center items-center">
-                <div class="size-2 rounded-full bg-neutral-400 dark:bg-neutral-600"></div>
-            </div>
-        </div>
-        <div class="grow pt-0.5 pb-8 group">
-            <time class="mb-8 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{formatDate(blog.data.pubDate)}</time>
-            <a
-                href=`/posts/${blog.slug}`
-                data-astro-prefetch
-                class="block justify-between mt-3 text-base font-bold text-neutral-700 outline-none ring-zinc-500 focus:outline-none focus-visible:ring focus-visible:ring-zinc-500 dark:ring-zinc-200"
-            >
-                <h3 class="flex gap-x-1.5 text-xl font-bold text-neutral-800 group-hover:text-orange-600 dark:text-neutral-200 dark:group-hover:text-orange-300">{blog.data.title}</h3>
-                <p class="mt-1.5 text-base text-neutral-600 group-hover:text-neutral-500 dark:text-neutral-500 dark:group-hover:text-neutral-400">{blog.data.description}</p>
-            </a>
-        </div>
+    <div class="p-5 mb-4 border border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+        <time class="text-lg font-semibold text-gray-900 dark:text-white">{blog.date}</time>
+        <ol class="mt-3 divide-y divide-gray-200 dark:divide-gray-700">
+            {
+                timeline.data.map((p:any)=>(
+                    <li class="rounded-xl hover:bg-gray-100 hover:text-orange-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-orange-500">
+                        <a href={`/posts/detail/${p.id}`} class="p-2 group">
+                            <div>{p.title}</div>
+                            <div class="items-center block sm:flex m-6">
+                                <img class="w-12 h-12 mb-3 me-3 rounded-full sm:mb-0 group-hover:scale-110 transition duration-550" src={p.cover} alt="Jese Leos image"/>
+                                <div class="text-gray-600 dark:text-gray-400">
+                                    <div class="text-base font-normal line-clamp-2"> {p.summary} </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                ))
+            }
+            
+            
+        </ol>
     </div>
 </div>

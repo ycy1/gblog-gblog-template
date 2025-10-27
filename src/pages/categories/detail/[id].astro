@@ -4,39 +4,34 @@ import { type CollectionEntry, getCollection } from 'astro:content'
 import MainSection from '@components/blocks/MainSection.astro'
 import BlogCard from '@components/blog/BlogCard.astro'
 import BlogList from '@components/blog/BlogList.astro'
-import { SITE } from '../../config'
+import { SITE } from '../../../config'
+import { getArticlesApi } from '@api/article'
 
-export async function getStaticPaths() {
-    const categories = await getCollection('categories')
-    return categories.map(category => ({
-        params: { slug: category.slug },
-        props: { category },
-    }))
-}
-
-const { category } = Astro.props
 const URL = Astro.url.href
 const categoriesURL = `${Astro.url.origin}/categories`
 
-// 获取所有文章集合  按分类
-const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
-    (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-).filter((b) => {
-    return b.data.category === category.slug
-});
+const { id } = Astro.params;
+const title = Astro.url.searchParams.get('title') === 'null' ? '' : (Astro.url.searchParams.get('title') || '')
+const description = Astro.url.searchParams.get('description') === 'null' ? '' : (Astro.url.searchParams.get('description') || '')
+
+const articles = await getArticlesApi({
+    categoryId: id,
+})
+const posts = articles.data.records || []
+
 ---
 
 <BaseLayout
-    title={category.data.title}
-    description={category.data.description}
+    title={title}
+    description={description}
     structuredData={{
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         'inLanguage': 'en-US',
         '@id': URL,
         'url': URL,
-        'name': `${category.data.title} - ${SITE.title}`,
-        'description': category.data.description,
+        'name': `${title} - ${SITE.title}`,
+        'description': description,
         'isPartOf': {
             '@type': 'WebSite',
             'url': categoriesURL,
@@ -45,8 +40,8 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
     }}
 >
     <MainSection
-        title={category.data.title}
-        subTitle={category.data.description}
+        title={title}
+        subTitle={description}
         btnExists={true}
         isCategory={true}
         btnTitle="分类列表"
@@ -56,12 +51,12 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
     <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 mb-10 2xl:max-w-full">
         <!-- 卡片 -->
         <div id="cardBlog" class="grid gap-6 grid-cols-1 lg:grid-cols-3 sm:grid-cols-2">
-            {posts.map(b => <BlogCard blog={b} />)}
+            {posts.map((b: any) => <BlogCard blog={b} />)}
         </div>
 
         <!-- 列表 -->
         <div id="listBlog"  class="block gap-6 grid-cols-1 lg:grid-cols-3 sm:grid-cols-2">
-            {posts.map(b => <BlogList blog={b} />)}
+            {posts.map((b: any) => <BlogList blog={b} />)}
         </div>
     </section>
 </BaseLayout>
